@@ -11,18 +11,20 @@ def top():
     return render_template('top.html')
 
 
+@app.route('/top',methods=["POST"])
+def returnTotop():
+    return render_template('top.html')
+
 # 2. startフォーム
-@app.route('/start')
+@app.route('/start',methods=["POST"])
 def start():
     # 入力画面のテンプレートを呼び出し
     return render_template('start.html')
 
-
-
 #仮
 # 2. ゲーム進行フォーム
-@app.route('/start/play')
-def game():
+@app.route('/start/play',methods=["POST"])
+def play():
     # ゲーム画面を呼び出し
     return render_template('play.html')
 
