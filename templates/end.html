@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>エンド画面</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='end.css') }}">
+</head>
+<body>
+  <main>
+    <h1>ゲーム終了</h1>
+    <form action="/start/play/end" method="POST">
+    <section class="name1_input">
+        <p>
+            <label>１: </label>
+        </p>
+        <p class="input2">
+            <label for="your_name1">name: </label>
+            <label for="your_name1">name: </label>
+            <input type="text" id="your_name1" name="name1">
+          </p> 
+    </section>
+    <section class="name1_input">
+        <p>
+            <label>２: </label>
+        </p>
+        <p class="input1">
+            <label for="your_name2">name: </label>
+            <label for="your_name2">name: </label>
+            <input type="text" id="your_name2" name="name2">
+          </p> 
+    </section>
+      <button type="submit">開始</button>
+    </form>
+  </main>
+</body>
+</html>
