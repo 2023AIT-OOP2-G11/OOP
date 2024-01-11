@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,27 +8,65 @@
     <title>Document</title>
     <link rel="stylesheet" href="game.css">
 </head>
+
 <body>
     <div class="mainwindow">
-    <div class="leftwindow">
-    <div class="window"></div>
-    <div class="floor"></div>
-    <div class="hp"></div>
-    <div class="text"></div>
-</div>
-<div class="rightwindow">
-    <div class="player player1"></div>
-    <div class="player player2"></div>
-    <div class="button buttonA">
-        <button>A</button>
+        <div class="leftwindow">
+            <div class="fullwindow">
+                <div class="window"></div>
+                <p class="floor">1F</p>
+                <div class="hp"></div>
+            </div>
+            <div class="text"></div>
+        </div>
+        <div class="rightwindow">
+            <div class="mainplayer">
+            <table class="player player1">
+                <tbody>
+                    <tr>
+                        <th>name:</th>
+                        <td>aaaaaaa</td>
+                    </tr>
+                    <tr>
+                        <th>HP:</th>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <th>MP:</th>
+                        <td>100</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="player player2">
+                <tbody>
+                    <tr>
+                        <th>name:</th>
+                        <td>aaaaaaa</td>
+                    </tr>
+                    <tr>
+                        <th>HP:</th>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <th>MP:</th>
+                        <td>100</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+            <div class="push">
+                <div class="button buttonA">
+                    <button>A</button>
+                </div>
+                <div class="button buttonB">
+                    <button>B</button>
+                </div>
+                <div class="button next">
+                    <button>next</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="button buttonB">
-        <button>B</button>
-    </div>
-    <div class="button next">
-        <button>next</button>
-    </div>
-</div>
-</div>
 </body>
+
 </html>
