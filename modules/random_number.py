@@ -9,10 +9,10 @@ def Random_Number(num):
         print("クリティカル")
 
     # 生成された乱数を出力（デバッグ用）
-    print(f"{random_number}")
+    #print(f"{random_number}")
 
     return random_number
 
 # 関数を呼び出して結果を表示
-result = Random_Number(10)
-print(f"{result}")
+# result = Random_Number(10)
+# print(f"{result}")
