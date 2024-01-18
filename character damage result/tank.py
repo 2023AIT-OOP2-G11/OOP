@@ -1,114 +1,68 @@
-import json
+import random
 
-def printTankStatus() -> None:
+class Character:
+    def __init__(self, name, Hp, Atk):
+        self.name = name
+        self.hp = Hp
+        self.attack = Atk
 
-    # ヒーローデータの読み込み
-    tank_header = []
-    tank_data = []
-    json_file_path = 'status.json'
-    with open('status.json') as f:
-        reader = json.load(f)
-        for row in reader:
-            if len(tank_header) == 0:
-                tank_header = row
-            else:
-                tank_data.append(row)
+    def is_alive(self):
+        return self.hp > 0
 
-    # 出力処理
-    for tank in tank_data:
-        if tank[0] == '1': # idが1の場合
-            print(f"{tank[1]}のステータスは" +
-            f"HP:{tank[2]}," +
-            f"MP:{tank[3]}," +
-            f"Atk:{tank[4]}," +
-            f"Def:{tank[5]}," +
-            f"Age:{tank[6]}")
+    def get_hit(self, damage):
+        self.hp -= damage
+        if self.hp < 0:
+            self.hp = 0
 
-    for tank in tank_data:
-        if tank[0] == '2': # idが2の場合
-            print(f"{tank[1]}のステータスは" +
-            f"HP:{tank[2]}," +
-            f"MP:{tank[3]}," +
-            f"Atk:{tank[4]}," +
-            f"Def:{tank[5]}," +
-            f"Age:{tank[6]}")
+    def attack_other(self, other):
+        damage = random.randint(0, self.attack)
+        print(f"{self.name} の攻撃 {other.name} に {damage} のダメージ!")
+        other.get_hit(damage)
 
-    for tank in tank_data:
-        if tank[0] == '3': # idが3の場合
-            print(f"{tank[1]}のステータスは" +
-            f"HP:{tank[2]}," +
-            f"MP:{tank[3]}," +
-            f"Atk:{tank[4]}," +
-            f"Def:{tank[5]}," +
-            f"Age:{tank[6]}")    
+class Tank(Character):
+    def attack(self, other):
+        damage = self.attack * 2
+        print(f"{self.name} は {damage} のダメージ!!")
+        other.get_hit(damage)
 
-def printTankStatusWithWeapon() -> None:
+    def guard(self):
+        Nodamage = random.randint(5, 10)
+        self.guard = Nodamage*0
+        print(f"ダメージは{self.guard}。{self.name}は守りを固めている")
 
-    # ヒーローデータの読み込み
-    tank_header = []
-    tank_data = []
-    with open('status.json') as f:
-        reader = json.reader(f)
-        for row in reader:
-            if len(hero_header) == 0:
-                hero_header = row
-            else:
-                tank_data.append(row)
+    def substitute(self, other):
+        damage = random.randint(0, other.attack)
+        print(f"{self.name}は身代わりになった。代わりにダメージを受けた。{damage}のダメージ")
+        self.get_hit(damage)
+
+def battle(tank, monster):
+    while tank.is_alive() and monster.is_alive():
+        print(f"\n{tank.name} のターン:")
+        print("1: 攻撃")
+        print("2: 守る")
+        print("3: 身代わり")
     
-    # 変数に保存する
-    # for文の中で代入する前に外で変数を宣言する
-    tank_name = None
-    tank_hp = None
-    tank_mp = None
-    tank_atk = None
-    tank_def = None
-    tank_age = None
-    for hero in tank_data: # hero_dataはcsv読み取りなので何行入っているかわからない
-        if hero[0] == '1': # idが1のとき代入
-            hero_name = hero[1]
-            hero_hp = int(hero[2])
-            hero_mp = int(hero[3])
-            hero_atk = int(hero[4])
-            hero_def = int(hero[5])
-            hero_age = int(hero[6])
+        choice = input("どうする？ (1 or 2 or 3): ")
+        if choice == '1':
+            tank.attack_other(monster)
+        elif choice == '2':
+            tank.guard()
+        elif choice == '3':
+            tank.substitute(monster)
+        else:
+            print("1,2,3の中から行動を選んでください.")
 
-    # 武器データの読み込み
-    weapon_header = []
-    weapon_data = []
-    with open('lecture02_Weapon.csv') as f:
-        reader = json.reader(f)
-        for row in reader:
-            if len(weapon_header) == 0:
-                 weapon_header = row
-            else:
-                 weapon_data.append(row)
+        if monster.is_alive():
+            monster.attack_other(tank)
 
-    # 変数に保存する
-    w = list(filter(lambda x: x[0] == weapon_data))[0]
-    # ステータスを文字から数値へ変換
-    w[2:7] = list(map(int, w[2:7]))
-    # listの一部を変数へ代入
-    weapon_name,weapon_hp,weapon_mp,weapon_atk,weapon_def,weapon_age = w[1:7]
+    if tank.is_alive():
+        print(f"{tank.name} 勝利!")
+    else:
+        print(f"{monster.name} 勝利!")
 
-    # 以下のようにheroと同様の方法で変数に保存してもOK
-    #for weapon in weapon_data: # weapon_dataはcsv読み取りなので何行入っているかわからない
-    #    if weapon[0] == hero_weapon:
-    #        weapon_name = int(weapon[1])
-    #        weapon_hp = int(weapon[2])
-    #        weapon_mp = int(weapon[3])
-    #        weapon_atk = int(weapon[4])
-    #        weapon_def = int(weapon[5])
-    #        weapon_age = int(weapon[6])
+# キャラクターの作成
+tank = Tank("Tank", 40, 5)
+monster = Character("Goblin", 30, 3)
 
-    # ステータス情報を出力する
-    print(f"{weapon_name}を装備した{hero_name}のステータスは" +
-        f"HP:{tank_hp+weapon_hp}," +
-        f"MP:{tank_mp+weapon_mp}," +
-        f"Atk:{tank_atk+weapon_atk}," +
-        f"Def:{tank_def+weapon_def}," +
-        f"Age:{tank_age+weapon_age}")
-
-
-if __name__ == '__main__':
-    printTankStatus()
-    printTankStatusWithWeapon()
+# バトルの開始
+battle(tank, monster)
