@@ -8,17 +8,18 @@
 </head>
 <body>
   <main>
-    <h1>ステータスを入力してください</h1>
+    <h1>スキルを選択してください：</h1>
     <form action="/start/play" method="POST">
-    <section class="name1_input">
+    <!-- <section class="name1_input">
         <p>
             <label>１: </label>
         </p>
         <p class="input2">
             <label for="your_name1">name: </label>
-            <label for="your_name1">name: </label>
-            <input type="text" id="your_name1" name="name1">
-          </p> 
+            <input type="text" id="your_name1" name="user1">
+            <label for="your_name1">HP: </label>
+            <input type="text" id="your_hp1" name="user1">
+        </p> 
     </section>
     <section class="name2_input">
         <p>
@@ -26,10 +27,49 @@
         </p>
         <p class="input1">
             <label for="your_name2">name: </label>
-            <label for="your_name2">name: </label>
-            <input type="text" id="your_name2" name="name2">
+            <input type="text" id="your_name2" name="user2">
+            <label for="your_name2">HP: </label>
+            <input type="text" id="your_hp2" name="user2">
           </p> 
-    </section>
+    </section> -->
+      <table border="0">
+        <tr>
+          <th>JOB</th>
+          <th>SKILL</th>
+        </tr>
+        <tr>
+          <td>剣士：</td>
+          <td>
+            <input type="radio" name="kenshi" value="スキル1">スキル1
+            <input type="radio" name="kenshi" value="スキル2">スキル2
+            <input type="radio" name="kenshi" value="スキル3">スキル3
+          </td>
+        </tr>
+        <tr>
+          <td>タンク役：</td>
+          <td>
+            <input type="radio" name="tannku" value="スキル1">スキル1
+            <input type="radio" name="tannku" value="スキル2">スキル2
+            <input type="radio" name="tannku" value="スキル3">スキル3
+          </td>
+        </tr>
+        <tr>
+          <td>支援役：</td>
+          <td>
+            <input type="radio" name="shienn" value="スキル1">スキル1
+            <input type="radio" name="shienn" value="スキル2">スキル2
+            <input type="radio" name="shienn" value="スキル3">スキル3
+          </td>
+        </tr>
+        <tr>
+          <td>回復役：</td>
+          <td>
+            <input type="radio" name="kaifuku" value="スキル1">スキル1
+            <input type="radio" name="kaifuku" value="スキル2">スキル2
+            <input type="radio" name="kaifuku" value="スキル3">スキル3
+          </td>
+        </tr>
+      </table>
       <button type="submit">開始</button>
     </form>
   </main>
