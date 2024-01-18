@@ -35,6 +35,10 @@ class Tank(Character):
         print(f"{self.name}は身代わりになった。代わりにダメージを受けた。{damage}のダメージ")
         self.get_hit(damage)
 
+    def display_status(self, other):
+        print(f"{self.name}の残りのHP:{self.hp}")
+        print(f"{other.name}の残りのHP:{other.hp}")
+
 def battle(tank, monster):
     while tank.is_alive() and monster.is_alive():
         print(f"\n{tank.name} のターン:")
@@ -51,6 +55,8 @@ def battle(tank, monster):
             tank.substitute(monster)
         else:
             print("それは使えないよ！!")
+
+        tank.display_status()
 
         if monster.is_alive():
             monster.attack_other(tank)
