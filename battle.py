@@ -29,10 +29,10 @@ class Hero(Character):
         if self.mp >= 5:
             special_damage = self.attack * 2
             self.mp -= 5
-            print(f"{self.name} の特殊攻撃 {special_damage} ダメージ! (残りMP: {self.mp})")
+            print(f"{self.name} の特殊攻撃 {special_damage} のダメージ! (残りMP: {self.mp})")
             other.get_hit(special_damage)
         else:
-            print(f"{self.name} MPが足りず、失敗!")
+            print(f"{self.name} のMPが足りず、失敗!")
 
     def heal(self):
         if self.mp >= 3:
@@ -41,7 +41,7 @@ class Hero(Character):
             self.hp += heal_amount
             print(f"{self.name} のHPが {heal_amount} 回復! (残りMP: {self.mp})")
         else:
-            print(f"{self.name} MPが足りず、失敗!")
+            print(f"{self.name} のMPが足りず、失敗!")
 
 class Monster(Character):
     def special_attack(self, other):
