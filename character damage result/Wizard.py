@@ -40,9 +40,14 @@ class Wizard(Character):
             self.attack_other(other)
 
     def heal(self):
-        heal_amount = random.randint(5, 10)
-        self.hp = min(self.hp + heal_amount, self.max_hp)
-        print(f"{self.name} の回復スキル！HPが {heal_amount} 回復しました。")
+        if self.mp >= 10:
+            heal_amount = random.randint(5, 10)
+            self.mp -= 10
+            self.hp += heal_amount
+            print(f"{self.name} の回復魔法! HPが {heal_amount} 回復! (残りMP: {self.mp})")
+        else:
+            print(f"{self.name} のMPが足りず、回復魔法が失敗!")
+
 
 def battle(wizard, monster):
     while wizard.is_alive() and monster.is_alive():
