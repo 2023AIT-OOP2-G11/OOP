@@ -28,32 +28,32 @@ def play():
     result:bool() = True  # スキルの選択チェック結果を格納する変数
 
     # スタート画面で選択されたデータを受け取る
-    kenshi_skill:str() = request.form.get("kenshi", None)
-    tannku_skill:str() = request.form.get("tannku", None)
-    shienn_skill:str() = request.form.get("shienn", None)
-    kaifuku_skill:str() = request.form.get("kaifuku", None)
+    yuusya_skill:int() = request.form.get("yuusya", None)
+    mahou_skill:int() = request.form.get("mahou", None)
+    kennshi_skill:int() = request.form.get("kennshi", None)
+    kaifuku_skill:int() = request.form.get("kaifuku", None)
 
     # 各職業のスキルが選択されていない場合、メッセージを追加し、resultをFalseにする
-    if kenshi_skill == None:
+    if yuusya_skill == None:
+        message.append("勇者のスキルを選択してください")
+        result = False
+    elif mahou_skill == None:
+        message.append("魔法使いのスキルを選択してください")
+        result = False
+    elif kennshi_skill == None:
         message.append("剣士のスキルを選択してください")
         result = False
-    elif tannku_skill == None:
-        message.append("タンク役のスキルを選択してください")
-        result = False
-    elif shienn_skill == None:
-        message.append("支援役のスキルを選択してください")
-        result = False
     elif kaifuku_skill == None:
-        message.append("回復役のスキルを選択してください")
+        message.append("僧侶のスキルを選択してください")
         result = False
 
     # ゲーム画面を呼び出す
     return render_template('game.html', 
                             result=result,
                             message=message,
-                            kenshi_skill=kenshi_skill,
-                            shienn_skill=shienn_skill,
-                            tannku_skill=tannku_skill,
+                            yuusya_skill=yuusya_skill,
+                            mahou_skill=mahou_skill,
+                            kennshi_skill=kennshi_skill,
                             kaifuku_skill=kaifuku_skill)
                             
 # 3. ゲームエンド画面
