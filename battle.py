@@ -80,7 +80,7 @@ def battle(hero, monster):
 
 # キャラクターの作成
 hero = Hero("Hero", 100, 15, 20) #左からHP, ATK, MP
-monster = Monster("Goblin", 60, 20)
+monster = Monster("Goblin", 80, 20)
 
 # バトルの開始
 battle(hero, monster)
