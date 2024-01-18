@@ -26,9 +26,9 @@ class Tank(Character):
         other.get_hit(damage)
 
     def guard(self):
-        Nodamage = random.randint(5, 10)
-        self.guard = Nodamage*0
-        print(f"ダメージは{self.guard}。{self.name}は守りを固めている")
+        Nodamage = self.attack * 0
+        print(f"ダメージは{Nodamage}。{self.name}は守りを固めている")
+        self.get_hit(Nodamage)
 
     def substitute(self, other):
         damage = random.randint(0, other.attack)
@@ -50,7 +50,7 @@ def battle(tank, monster):
         elif choice == '3':
             tank.substitute(monster)
         else:
-            print("1,2,3の中から行動を選んでください.")
+            print("それは使えないよ！!")
 
         if monster.is_alive():
             monster.attack_other(tank)
