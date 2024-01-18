@@ -13,6 +13,7 @@ class Character:
         self.hp -= damage
         if self.hp < 0:
             self.hp = 0
+        print(f"{self.name} の残りHP: {self.hp}")
 
     def attack_other(self, other):
         damage = random.randint(0, self.attack)
@@ -25,22 +26,31 @@ class Hero(Character):
         self.mp = mp
 
     def special_attack(self, other):
-        if self.mp >= 5:  # 特別攻撃に必要なMP
+        if self.mp >= 5:
             special_damage = self.attack * 2
-            self.mp -= 5  # MP消費
-            print(f"{self.name} の特殊攻撃 {special_damage} のダメージ! (残りMP: {self.mp})")
+            self.mp -= 5
+            print(f"{self.name} の特殊攻撃 {special_damage} ダメージ! (残りMP: {self.mp})")
             other.get_hit(special_damage)
         else:
-            print(f"{self.name} のMPが足りず、失敗!")
+            print(f"{self.name} MPが足りず、失敗!")
 
     def heal(self):
-        if self.mp >= 10:  # 回復に必要なMP
-            heal_amount = random.randint(5, 10)
-            self.mp -= 10  # MP消費
+        if self.mp >= 3:
+            heal_amount = random.randint(20, 50)
+            self.mp -= 3
             self.hp += heal_amount
             print(f"{self.name} のHPが {heal_amount} 回復! (残りMP: {self.mp})")
         else:
-            print(f"{self.name} のMPが足りず、失敗!")
+            print(f"{self.name} MPが足りず、失敗!")
+
+class Monster(Character):
+    def special_attack(self, other):
+        if random.random() < 0.3:  # 30%の確率で特殊攻撃
+            special_damage = self.attack * 2
+            print(f"{self.name} に {special_damage} の痛恨のダメージ!")
+            other.get_hit(special_damage)
+        else:
+            self.attack_other(other)
 
 def battle(hero, monster):
     while hero.is_alive() and monster.is_alive():
@@ -57,19 +67,19 @@ def battle(hero, monster):
         elif choice == '3':
             hero.heal()
         else:
-            print("それは使えないよ!!")
+            print("それは使えないよ!")
 
         if monster.is_alive():
-            monster.attack_other(hero)
+            monster.special_attack(hero)  # モンスターの攻撃（通常または特殊）
 
     if hero.is_alive():
-        print(f"{hero.name} たちの勝ち!")
+        print(f"{hero.name} たちの勝利!")
     else:
         print(f"{hero.name} たちは敗北した...")
 
 # キャラクターの作成
-hero = Hero("Hero", 40, 5, 20)  # HP, 攻撃力, MPを設定
-monster = Character("Goblin", 30, 3)
+hero = Hero("Hero", 100, 15, 20) #左からHP, ATK, MP
+monster = Monster("Goblin", 60, 20)
 
 # バトルの開始
 battle(hero, monster)
