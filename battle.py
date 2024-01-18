@@ -69,7 +69,7 @@ def battle(hero, monster):
 
 # キャラクターの作成
 hero = Hero("Hero", 40, 5, 20)  # HP, 攻撃力, MPを設定
-monster = Character("Goblin", 30, 3)
+monster = Character("Goblin", 50, 10)
 
 # バトルの開始
 battle(hero, monster)
