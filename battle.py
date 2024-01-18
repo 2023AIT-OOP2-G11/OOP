@@ -40,6 +40,7 @@ class Hero(Character):
             self.mp -= 3
             self.hp += heal_amount
             print(f"{self.name} のHPが {heal_amount} 回復! (残りMP: {self.mp})")
+            print(f"{self.name} の残りHP: {self.hp}")
         else:
             print(f"{self.name} のMPが足りず、失敗!")
 
