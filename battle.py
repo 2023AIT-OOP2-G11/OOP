@@ -16,7 +16,7 @@ class Character:
 
     def attack_other(self, other):
         damage = random.randint(0, self.attack)
-        print(f"{self.name} の攻撃 {other.name} に {damage} ダメージ!")
+        print(f"{self.name} の攻撃 {other.name} に {damage} のダメージ!")
         other.get_hit(damage)
 
 class Hero(Character):
@@ -28,7 +28,7 @@ class Hero(Character):
         if self.mp >= 5:  # 特別攻撃に必要なMP
             special_damage = self.attack * 2
             self.mp -= 5  # MP消費
-            print(f"{self.name} の特殊攻撃 {special_damage} ダメージ! (残りMP: {self.mp})")
+            print(f"{self.name} の特殊攻撃 {special_damage} のダメージ! (残りMP: {self.mp})")
             other.get_hit(special_damage)
         else:
             print(f"{self.name} のMPが足りず、失敗!")
