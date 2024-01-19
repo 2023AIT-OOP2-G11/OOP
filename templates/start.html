@@ -8,17 +8,18 @@
 </head>
 <body>
   <main>
-    <h1>ステータスを入力してください</h1>
+    <h1>スキルを選択してください：</h1>
     <form action="/start/play" method="POST">
-    <section class="name1_input">
+    <!-- <section class="name1_input">
         <p>
             <label>１: </label>
         </p>
         <p class="input2">
             <label for="your_name1">name: </label>
-            <label for="your_name1">name: </label>
-            <input type="text" id="your_name1" name="name1">
-          </p> 
+            <input type="text" id="your_name1" name="user1">
+            <label for="your_name1">HP: </label>
+            <input type="text" id="your_hp1" name="user1">
+        </p> 
     </section>
     <section class="name2_input">
         <p>
@@ -26,10 +27,49 @@
         </p>
         <p class="input1">
             <label for="your_name2">name: </label>
-            <label for="your_name2">name: </label>
-            <input type="text" id="your_name2" name="name2">
+            <input type="text" id="your_name2" name="user2">
+            <label for="your_name2">HP: </label>
+            <input type="text" id="your_hp2" name="user2">
           </p> 
-    </section>
+    </section> -->
+      <table border="0">
+        <tr>
+          <th>JOB</th>
+          <th>SKILL</th>
+        </tr>
+        <tr>
+          <td>勇者：</td>
+          <td>
+            <input type="radio" name="yuusya" value=1>剣の一閃
+            <input type="radio" name="yuusya" value=2>守りの姿勢
+            <input type="radio" name="yuusya" value=3>連続斬り
+          </td>
+        </tr>
+        <tr>
+          <td>魔法使い：</td>
+          <td>
+            <input type="radio" name="mahou" value=1>火の玉
+            <input type="radio" name="mahou" value=2>氷の結界
+            <input type="radio" name="mahou" value=3>雷の魔法
+          </td>
+        </tr>
+        <tr>
+          <td>剣士：</td>
+          <td>
+            <input type="radio" name="kennshi" value=1>突進斬り
+            <input type="radio" name="kennshi" value=2>かばう
+            <input type="radio" name="kennshi" value=3>回し斬り
+          </td>
+        </tr>
+        <tr>
+          <td>僧侶：</td>
+          <td>
+            <input type="radio" name="kaifuku" value=1>癒しの手
+            <input type="radio" name="kaifuku" value=2>祈りの光
+            <input type="radio" name="kaifuku" value=3>清めの泉
+          </td>
+        </tr>
+      </table>
       <button type="submit">開始</button>
     </form>
   </main>
