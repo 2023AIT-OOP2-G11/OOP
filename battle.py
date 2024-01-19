@@ -15,6 +15,7 @@ class Character:
         self.hp -= damage
         if self.hp < 0:
             self.hp = 0
+        print(f"{self.name} の残りHP: {self.hp}")
 
     def attack_other(self, other):
         damage = random.randint(0, self.attack)
@@ -159,3 +160,13 @@ monster = Character("モンスター", 30, 3)
 
 # バトルの開始
 battle([hero, swordsman, wizard, priest], monster)
+
+#モンスターの特殊行動
+#class Monster(Character):
+ #   def special_attack(self, other):
+  #      if random.random() < 0.3:  # 30%の確率で特殊攻撃
+   #         special_damage = self.attack * 2
+    #        print(f"{self.name} に {special_damage} の痛恨のダメージ!")
+     #       other.get_hit(special_damage)
+      #  else:
+       #     self.attack_other(other)
