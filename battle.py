@@ -1,4 +1,6 @@
 import random
+#これはゲーム内のすべてのキャラクターの基本クラス
+#名前、ヒットポイント（hp）、攻撃力などの属性を持っている
 
 class Character:
     def __init__(self, name, hp, attack):
@@ -18,7 +20,7 @@ class Character:
         damage = random.randint(0, self.attack)
         print(f"{self.name} の通常攻撃 {other.name} に {damage} のダメージ!")
         other.get_hit(damage)
-
+#Character クラスを継承し、魔法ポイント（mp）という新しい属性を追加
 class Hero(Character):
     def __init__(self, name, hp, attack, mp):
         super().__init__(name, hp, attack)
@@ -41,7 +43,10 @@ class Hero(Character):
             print(f"{self.name} の回復魔法! HPが {heal_amount} 回復! (残りMP: {self.mp})")
         else:
             print(f"{self.name} のMPが足りず、回復魔法が失敗!")
-
+            
+#Hero と同様に、これらのクラスは Character を継承し、キャラクタータイプに固有の追加の属性やメソッドを持つ可能性があります。
+            #is_alive: キャラクターが生きているかどうかをヒットポイントを基に確認します。get_hit: キャラクターがダメージを受けたときにヒットポイントを更新します。
+            #attack_other: ランダムなダメージで他のキャラクターに通常攻撃をシミュレートします。
 class Swordsman(Character):
     def __init__(self, name, hp, attack):
         super().__init__(name, hp, attack)
@@ -51,6 +56,7 @@ class Swordsman(Character):
         print(f"{self.name} の強力な突進! {other.name} に {special_damage} のダメージ!")
         other.get_hit(special_damage)
 
+>>>>>>> 7201e79e322cd351350d342f3b676cfd08c52707
     def block(self):
         block_value = random.randint(5, 10)
         print(f"{self.name} が防御態勢をとった! 次の攻撃からのダメージを軽減します。 (軽減量: {block_value})")
@@ -89,6 +95,11 @@ class Priest(Character):
     def purify(self):
         print(f"{self.name} が味方を浄化した! 状態異常が解除された。")
 
+<<<<<<< HEAD
+=======
+#一連のヒーローとモンスターとの戦闘をシミュレートするメイン関数です。
+#各ヒーローをグループ内で反復処理し、アクション（通常攻撃、特殊攻撃、またはキャラクター固有のアクション）を選択できるようにします。
+>>>>>>> 7201e79e322cd351350d342f3b676cfd08c52707
 def battle(heroes, monster):
     while all(hero.is_alive() for hero in heroes) and monster.is_alive():
         for hero in heroes:
@@ -136,6 +147,7 @@ def battle(heroes, monster):
         print(f"{', '.join(hero.name for hero in heroes)} たちの勝ち!")
     else:
         print(f"{', '.join(hero.name for hero in heroes)} たちは敗北した...")
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 # キャラクターの作成
@@ -143,12 +155,20 @@ hero = Hero("Hero", 40, 5, 20)  # HP, 攻撃力, MPを設定
 monster = Character("Goblin", 50, 10)
 =======
 
+=======
+#バトル関数は実行されたアクションとバトルの結果を出力します。
+#このコードは基本的なオブジェクト指向プログラミングの概念を示しており、異なるキャラクタータイプを持つターン制のバトルシナリオをシミュレートしています。
+
+>>>>>>> 7201e79e322cd351350d342f3b676cfd08c52707
 hero = Hero("勇者", 40, 5, 20)
 swordsman = Swordsman("剣士", 35, 8)
 wizard = Wizard("魔法使い", 30, 6, 15)
 priest = Priest("僧侶", 30, 4, 25)
 monster = Character("モンスター", 30, 3)
+<<<<<<< HEAD
 >>>>>>> 16cd181e4506c7838247b34fa8ea6f2246369fdc
+=======
+>>>>>>> 7201e79e322cd351350d342f3b676cfd08c52707
 
 # バトルの開始
 battle([hero, swordsman, wizard, priest], monster)

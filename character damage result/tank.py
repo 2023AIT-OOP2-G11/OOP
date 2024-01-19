@@ -35,6 +35,13 @@ class Tank(Character):
         print(f"{self.name}は身代わりになった。代わりにダメージを受けた。{damage}のダメージ")
         self.get_hit(damage)
 
+<<<<<<< HEAD
+=======
+    def display_status(self, other):
+        print(f"{self.name}の残りのHP:{self.hp}")
+        print(f"{other.name}の残りのHP:{other.hp}")
+
+>>>>>>> 7201e79e322cd351350d342f3b676cfd08c52707
 def battle(tank, monster):
     while tank.is_alive() and monster.is_alive():
         print(f"\n{tank.name} のターン:")
@@ -52,6 +59,7 @@ def battle(tank, monster):
         else:
             print("それは使えないよ！!")
 
+<<<<<<< HEAD
         if monster.is_alive():
             monster.attack_other(tank)
 
@@ -66,3 +74,21 @@ monster = Character("Goblin", 30, 3)
 
 # バトルの開始
 battle(tank, monster)
+=======
+        tank.display_status()
+
+        if monster.is_alive():
+            monster.attack_other(tank)
+
+    if tank.is_alive():
+        print(f"{tank.name} 勝利!")
+    else:
+        print(f"{monster.name} 勝利!")
+
+# キャラクターの作成
+tank = Tank("Tank", 40, 5)
+monster = Character("Goblin", 30, 3)
+
+# バトルの開始
+battle(tank, monster)
+>>>>>>> 7201e79e322cd351350d342f3b676cfd08c52707
