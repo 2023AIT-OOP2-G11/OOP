@@ -20,7 +20,6 @@ def start():
     # 入力画面のテンプレートを呼び出し
     return render_template('start.html')
 
-
 # 2. ゲームスキル送信先、ゲーム進行フォーム
 @app.route('/start/play',methods=["POST"])
 def play():
