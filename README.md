@@ -1,5 +1,9 @@
 # RPGゲーム
 
+## Require
+Python version : 3.11.5 or higher
+Flask==3.0.0
+
 ## 1. プロジェクト概要
 
 ### 1.1 目的
