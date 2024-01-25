@@ -17,10 +17,12 @@
         <div class="leftwindow">
             <div class="fullwindow">
                 <div class="window"></div>
-                <p class="floor">1F</p>
-                <div class="hp"></div>
+                <div class="hp">
+                <div class="full_hp"></div>
+                <div class="monster_hp"></div>
             </div>
-            <div class="text"></div>
+            </div>
+            <div class="text">{{message}}</div>
         </div>
         <div class="rightwindow">
             <div class="mainplayer">
@@ -28,15 +30,15 @@
                 <tbody>
                     <tr>
                         <th>name:</th>
-                        <td>aaaaaaa</td>
+                        <td>勇者</td>
                     </tr>
                     <tr>
                         <th>HP:</th>
-                        <td>100</td>
+                        <td>{{hero_hp}}</td>
                     </tr>
                     <tr>
                         <th>MP:</th>
-                        <td>100</td>
+                        <td>{{hero_mp}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -44,15 +46,15 @@
                 <tbody>
                     <tr>
                         <th>name:</th>
-                        <td>aaaaaaa</td>
+                        <td>剣士</td>
                     </tr>
                     <tr>
                         <th>HP:</th>
-                        <td>100</td>
+                        <td>{{swordsman_hp}}</td>
                     </tr>
                     <tr>
                         <th>MP:</th>
-                        <td>100</td>
+                        <td>{{swordsman_mp}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -60,15 +62,15 @@
                 <tbody>
                     <tr>
                         <th>name:</th>
-                        <td>aaaaaaa</td>
+                        <td>魔法使い</td>
                     </tr>
                     <tr>
                         <th>HP:</th>
-                        <td>100</td>
+                        <td>{{wizard_hp}}</td>
                     </tr>
                     <tr>
                         <th>MP:</th>
-                        <td>100</td>
+                        <td>{{wizard_mp}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -76,28 +78,28 @@
                 <tbody>
                     <tr>
                         <th>name:</th>
-                        <td>aaaaaaa</td>
+                        <td>僧侶</td>
                     </tr>
                     <tr>
                         <th>HP:</th>
-                        <td>100</td>
+                        <td>{{priest_hp}}</td>
                     </tr>
                     <tr>
                         <th>MP:</th>
-                        <td>100</td>
+                        <td>{{priest_mp}}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
             <div class="push">
                 <div class="button buttonA">
-                    <button>A</button>
+                    <button name="skill" value=1>1</button>
                 </div>
                 <div class="button buttonB">
-                    <button>B</button>
+                    <button name="skill" value=2>2</button>
                 </div>
                 <div class="button next">
-                    <button>next</button>
+                    <button name="skill" value=3>3</button>
                 </div>
             </div>
         </div>
