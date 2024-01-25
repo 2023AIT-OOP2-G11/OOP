@@ -1,5 +1,6 @@
 from Character import Character
 import random
+
 class Wizard(Character):
     def __init__(self, name, hp, attack, mp):
         super().__init__(name, hp, attack)
