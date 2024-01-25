@@ -14,52 +14,82 @@ def top():
 def returnTotop():
     return render_template('top.html')
 
-# 2. startフォーム
+# 2. ゲーム進行フォーム
 @app.route('/start',methods=["POST"])
-def start():
-    # 入力画面のテンプレートを呼び出し
-    return render_template('start.html')
-
-# 2. ゲームスキル送信先、ゲーム進行フォーム
-@app.route('/start/play',methods=["POST"])
 def play():
-    message:list() = []  # メッセージを格納す
-    result:bool() = True  # スキルの選択チェック結果を格納する変数
+    choice = request.form.get('skill')
+    if choice==-1:
+                # ゲーム画面を呼び出す
+                return render_template('game.html', 
+                                        message='test',
+                                        monster_hp=100,
+                                        hero_hp=100,
+                                        swordsman_hp=100,
+                                        wizard_hp=100,
+                                        priest_hp=100,
+                                        hero_mp=100,
+                                        swordsman_mp=100,
+                                        wizard_mp=100,
+                                        priest_mp=100
+                                        )
+    # モンスタステータスの確認
 
-    # スタート画面で選択されたデータを受け取る
-    yuusya_skill:int() = request.form.get("yuusya", None)
-    mahou_skill:int() = request.form.get("mahou", None)
-    kennshi_skill:int() = request.form.get("kennshi", None)
-    kaifuku_skill:int() = request.form.get("kaifuku", None)
+    if play.monster.is_alive():
 
-    # 各職業のスキルが選択されていない場合、メッセージを追加し、resultをFalseにする
-    if yuusya_skill == None:
-        message.append("勇者のスキルを選択してください")
-        result = False
-    elif mahou_skill == None:
-        message.append("魔法使いのスキルを選択してください")
-        result = False
-    elif kennshi_skill == None:
-        message.append("剣士のスキルを選択してください")
-        result = False
-    elif kaifuku_skill == None:
-        message.append("僧侶のスキルを選択してください")
-        result = False
+        # キャラクタステータスを確認
+        if all(hero.is_alive() for hero in heroes):
+            # game画面が選択したボタンを取得する
+            choice = request.form.get('skill')
+            if choice==-1:
+                # ゲーム画面を呼び出す
+                return render_template('game.html', 
+                                        message='test',
+                                        monster_hp=100,
+                                        hero_hp=100,
+                                        swordsman_hp=100,
+                                        wizard_hp=100,
+                                        priest_hp=100,
+                                        hero_mp=100,
+                                        swordsman_mp=100,
+                                        wizard_mp=100,
+                                        priest_mp=100
+                                        )
+            else:
+                self.play(choice)
 
-    # ゲーム画面を呼び出す
-    return render_template('game.html', 
-                            result=result,
-                            message=message,
-                            yuusya_skill=yuusya_skill,
-                            mahou_skill=mahou_skill,
-                            kennshi_skill=kennshi_skill,
-                            kaifuku_skill=kaifuku_skill)
+            # ゲーム画面を呼び出す
+            return render_template('game.html', 
+                                    message=message,
+                                    monster_hp=monster_hp,
+                                    hero_hp=hero_hp,
+                                    swordsman_hp=swordsman_hp,
+                                    wizard_hp=wizard_hp,
+                                    priest_hp=priest_hp,
+                                    hero_mp=hero_mp,
+                                    swordsman_mp=swordsman_mp,
+                                    wizard_mp=wizard_mp,
+                                    priest_mp=priest_mp
+                                    )
+
+        # キャラクターが倒された
+        else:
+            # エンド画面を呼び出す
+            return render_template('end.html',message="ヒーロたちは敗北した...")
+
+    # モンスタが倒された場合
+    else:
+        # エンド画面を呼び出す
+        return render_template('end.html',message="ヒーロたちの勝ち!")
+
                             
 # 3. ゲームエンド画面
-@app.route('/start/play/end')
+@app.route('/start/end')
 def end():
     # ゲームのエンドを呼び出し
     return render_template('end.html')
 
 if __name__ == "__main__":
+
+    # ゲーム進行を管理するインスタンス
+    self.play = Battle()
     app.run()
