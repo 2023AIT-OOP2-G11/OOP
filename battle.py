@@ -21,6 +21,7 @@ class Character:
         damage = random.randint(0, self.attack)
         print(f"{self.name} の通常攻撃 {other.name} に {damage} のダメージ!")
         other.get_hit(damage)
+
 #Character クラスを継承し、魔法ポイント（mp）という新しい属性を追加
 class Hero(Character):
     def __init__(self, name, hp, attack, mp):
@@ -99,13 +100,13 @@ class Priest(Character):
 #一連のヒーローとモンスターとの戦闘をシミュレートするメイン関数です。
 #各ヒーローをグループ内で反復処理し、アクション（通常攻撃、特殊攻撃、またはキャラクター固有のアクション）を選択できるようにします。
         
-def battle(heroes, monster):
+def battle(heroes, monster,):
     while all(hero.is_alive() for hero in heroes) and monster.is_alive():
         for hero in heroes:
             print(f"\n{hero.name} のターン:")
             print("1: 通常攻撃")
             print("2: 特殊攻撃")
-            if isinstance(hero, Hero):
+            if isinstance(hero, Hero):  
                 print("3: 回復")
             elif isinstance(hero, Swordsman):
                 print("3: 防御")
