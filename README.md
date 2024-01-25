@@ -2,8 +2,15 @@
 
 ## Require
 - Python version : 3.11.5 or higher
+  
 ```
 pip install Flask
+```
+
+## 実行方法
+
+```
+python main.py
 ```
 
 ## 1. プロジェクト概要
