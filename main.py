@@ -10,32 +10,32 @@ app = Flask(__name__)
 def top():
     return render_template('top.html')
 
+# エンド画面からトップ画面に戻った場合
 @app.route('/top',methods=["POST"])
 def returnTotop():
     return render_template('top.html')
 
 # 2. ゲーム進行フォーム
 @app.route('/start',methods=["POST"])
-def play():
-    choice = request.form.get('skill')
-    if choice==-1:
-                # ゲーム画面を呼び出す
-                return render_template('game.html', 
-                                        message='test',
-                                        monster_hp=100,
-                                        hero_hp=100,
-                                        swordsman_hp=100,
-                                        wizard_hp=100,
-                                        priest_hp=100,
-                                        hero_mp=100,
-                                        swordsman_mp=100,
-                                        wizard_mp=100,
-                                        priest_mp=100
-                                        )
-    # モンスタステータスの確認
+def start():
+     # ゲーム画面を呼び出す
+    return render_template('game.html', 
+                            message='test',
+                            monster_hp=100,
+                            hero_hp=100,
+                            swordsman_hp=100,
+                            wizard_hp=100,
+                            priest_hp=100,
+                            hero_mp=100,
+                            swordsman_mp=100,
+                            wizard_mp=100,
+                            priest_mp=100
+                            )
 
+# 2. ゲーム進行フォーム
+@app.route('/game/play',methods=["POST"])
+def game():
     if play.monster.is_alive():
-
         # キャラクタステータスを確認
         if all(hero.is_alive() for hero in heroes):
             # game画面が選択したボタンを取得する
@@ -56,7 +56,6 @@ def play():
                                         )
             else:
                 self.play(choice)
-
             # ゲーム画面を呼び出す
             return render_template('game.html', 
                                     message=message,
@@ -70,18 +69,15 @@ def play():
                                     wizard_mp=wizard_mp,
                                     priest_mp=priest_mp
                                     )
-
         # キャラクターが倒された
         else:
             # エンド画面を呼び出す
             return render_template('end.html',message="ヒーロたちは敗北した...")
-
     # モンスタが倒された場合
     else:
         # エンド画面を呼び出す
         return render_template('end.html',message="ヒーロたちの勝ち!")
-
-                            
+            
 # 3. ゲームエンド画面
 @app.route('/start/end')
 def end():
@@ -89,7 +85,6 @@ def end():
     return render_template('end.html')
 
 if __name__ == "__main__":
-
     # ゲーム進行を管理するインスタンス
-    self.play = Battle()
+    # self.play = Battle()
     app.run()
