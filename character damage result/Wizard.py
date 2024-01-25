@@ -1,4 +1,4 @@
-from Character import Character
+from Character import random
 
 class Wizard(Character):
     def __init__(self, name, hp, attack, mp):
