@@ -93,10 +93,10 @@ body{
 }
 
 button{
-    border-radius: 50%;
+    border-radius: 10px;
     width: 100px;
     height: 100px;
-    font-size: 30px;
+    font-size: 25px;
     margin: 30px;
     margin-top: 70px;
 }
