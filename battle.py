@@ -20,15 +20,14 @@ class Character:
 
     def attack_other(self, other):
         damage = random.randint(0, self.attack)
-        print(f"{self.name} の通常攻撃 {other.name} に {damage} のダメージ!")
+        print(f"\n{self.name} の通常攻撃 : {other.name} に {damage} のダメージ!")
         other.get_hit(damage)
-
     #プレイヤー
     def getHP(self):
         return self.hp
     def getMP(self):
         return self.mp
-    
+   
 class Hero(Character):
     def __init__(self, name, hp, attack, mp):
         super().__init__(name, hp, attack)
@@ -38,36 +37,36 @@ class Hero(Character):
         if self.mp >= 5:
             special_damage = self.attack * 2
             self.mp -= 5
-            print(f"{self.name} の特殊攻撃 {special_damage} のダメージ! (残りMP: {self.mp})")
+            print(f"\n{self.name} の特殊攻撃 {special_damage} のダメージ! (残りMP: {self.mp})")
             other.get_hit(special_damage)
         else:
-            print(f"{self.name} のMPが足りず、特殊攻撃が失敗!")
+            print(f"\n{self.name} のMPが足りず、特殊攻撃が失敗!")
 
     def heal(self):
         if self.mp >= 10:
             heal_amount = random.randint(5, 10)
             self.mp -= 10
             self.hp += heal_amount
-            print(f"{self.name} の回復魔法! HPが {heal_amount} 回復! (残りMP: {self.mp})")
+            print(f"\n{self.name} の回復魔法! HPが {heal_amount} 回復! (残りMP: {self.mp})")
         else:
-            print(f"{self.name} のMPが足りず、回復魔法が失敗!")
+            print(f"\n{self.name} のMPが足りず、回復魔法が失敗!")
             
 #Hero と同様に、これらのクラスは Character を継承し、キャラクタータイプに固有の追加の属性やメソッドを持つ可能性があります。
-            #is_alive: キャラクターが生きているかどうかをヒットポイントを基に確認します。get_hit: キャラクターがダメージを受けたときにヒットポイントを更新します。
-            #attack_other: ランダムなダメージで他のキャラクターに通常攻撃をシミュレートします。
+#is_alive: キャラクターが生きているかどうかをヒットポイントを基に確認します。get_hit: キャラクターがダメージを受けたときにヒットポイントを更新します。
+#attack_other: ランダムなダメージで他のキャラクターに通常攻撃をシミュレートします。
 class Swordsman(Character):
     def __init__(self, name, hp, attack, mp):
         super().__init__(name, hp, attack, mp)
 
     def special_attack(self, other):
         special_damage = self.attack * 2
-        print(f"{self.name} の強力な突進! {other.name} に {special_damage} のダメージ!")
+        print(f"\n{self.name} の強力な突進! {other.name} に {special_damage} のダメージ!")
         other.get_hit(special_damage)
 
 
     def block(self):
         block_value = random.randint(5, 10)
-        print(f"{self.name} が防御態勢をとった! 次の攻撃からのダメージを軽減します。 (軽減量: {block_value})")
+        print(f"\n{self.name} が防御態勢をとった! 次の攻撃からのダメージを軽減! (軽減量: {block_value})")
 
 class Wizard(Character):
     def __init__(self, name, hp, attack, mp):
@@ -78,13 +77,13 @@ class Wizard(Character):
         if self.mp >= 8:
             spell_damage = random.randint(10, 20)
             self.mp -= 8
-            print(f"{self.name} が魔法を唱えた! {other.name} に {spell_damage} のダメージ! (残りMP: {self.mp})")
+            print(f"\n{self.name} が魔法を唱えた! {other.name} に {spell_damage} のダメージ! (残りMP: {self.mp})")
             other.get_hit(spell_damage)
         else:
-            print(f"{self.name} のMPが足りず、魔法が失敗!")
+            print(f"\n{self.name} のMPが足りず、魔法が失敗!")
 
     def teleport(self):
-        print(f"{self.name} がテレポートして攻撃を回避した!")
+        print(f"\n{self.name} がテレポートして攻撃を回避した!")
 
 class Priest(Character):
     def __init__(self, name, hp, attack, mp):
@@ -96,12 +95,21 @@ class Priest(Character):
             heal_amount = random.randint(15, 25)
             self.mp -= 12
             target.hp += heal_amount
-            print(f"{self.name} の癒しの魔法! {target.name} のHPが {heal_amount} 回復! (残りMP: {self.mp})")
+            print(f"\n{self.name} の癒しの魔法! {target.name} のHPが {heal_amount} 回復! (残りMP: {self.mp})")
         else:
-            print(f"{self.name} のMPが足りず、癒しの魔法が失敗!")
+            print(f"\n{self.name} のMPが足りず、癒しの魔法が失敗!")
 
     def purify(self):
-        print(f"{self.name} が味方を浄化した! 状態異常が解除された。")
+        print(f"\n{self.name} が味方を浄化した! 状態異常が解除された。")
+
+class Monster(Character):
+    def special_attack(self, other):
+        if random.random() < 0.4:  # 40%の確率で特殊攻撃
+            special_damage = self.attack * 2
+            print(f"\n{self.name} の特殊攻撃! {other.name} に {special_damage} のダメージ!")
+            other.get_hit(special_damage)
+        else:
+            self.attack_other(other)
 
 class Monster(Character):
     def __init__(self, name, hp, attack, mp):
@@ -160,3 +168,4 @@ battle([hero, swordsman, wizard, priest], monster)
      #       other.get_hit(special_damage)
       #  else:
        #     self.attack_other(other)
+
