@@ -1,12 +1,13 @@
 import random
 #これはゲーム内のすべてのキャラクターの基本クラス
-#名前、ヒットポイント（hp）、攻撃力などの属性を持っている
+#名前（name）、ヒットポイント（hp）、攻撃力（attack）、マジックポイント（mp）の属性を持っている
 
 class Character:
-    def __init__(self, name, hp, attack):
+    def __init__(self, name, hp, attack, mp):
         self.name = name
         self.hp = hp
         self.attack = attack
+        self.mp = mp
 
     def is_alive(self):
         return self.hp > 0
@@ -21,7 +22,13 @@ class Character:
         damage = random.randint(0, self.attack)
         print(f"{self.name} の通常攻撃 {other.name} に {damage} のダメージ!")
         other.get_hit(damage)
-#Character クラスを継承し、魔法ポイント（mp）という新しい属性を追加
+
+    #プレイヤー
+    def getHP(self):
+        return self.hp
+    def getMP(self):
+        return self.mp
+    
 class Hero(Character):
     def __init__(self, name, hp, attack, mp):
         super().__init__(name, hp, attack)
@@ -49,8 +56,8 @@ class Hero(Character):
             #is_alive: キャラクターが生きているかどうかをヒットポイントを基に確認します。get_hit: キャラクターがダメージを受けたときにヒットポイントを更新します。
             #attack_other: ランダムなダメージで他のキャラクターに通常攻撃をシミュレートします。
 class Swordsman(Character):
-    def __init__(self, name, hp, attack):
-        super().__init__(name, hp, attack)
+    def __init__(self, name, hp, attack, mp):
+        super().__init__(name, hp, attack, mp)
 
     def special_attack(self, other):
         special_damage = self.attack * 2
@@ -96,56 +103,39 @@ class Priest(Character):
     def purify(self):
         print(f"{self.name} が味方を浄化した! 状態異常が解除された。")
 
+class Monster(Character):
+    def __init__(self, name, hp, attack, mp):
+        super().__init__(name, hp, attack)
+        self.mp = mp
+
 #一連のヒーローとモンスターとの戦闘をシミュレートするメイン関数です。
 #各ヒーローをグループ内で反復処理し、アクション（通常攻撃、特殊攻撃、またはキャラクター固有のアクション）を選択できるようにします。
         
-def battle(heroes, monster):
-    while all(hero.is_alive() for hero in heroes) and monster.is_alive():
-        for hero in heroes:
-            print(f"\n{hero.name} のターン:")
-            print("1: 通常攻撃")
-            print("2: 特殊攻撃")
-            if isinstance(hero, Hero):
-                print("3: 回復")
-            elif isinstance(hero, Swordsman):
-                print("3: 防御")
-            elif isinstance(hero, Wizard):
-                print("3: 魔法")
-            elif isinstance(hero, Priest):
-                print("3: 癒し")
+def battle(heroes, monster, choice):
+    if choice == '1':
+        hero.attack_other(monster)
+    elif choice == '2':
+        if isinstance(hero, Hero):
+            hero.special_attack(monster)
+        elif isinstance(hero, Swordsman):
+            hero.special_attack(monster)
+        elif isinstance(hero, Wizard):
+            hero.cast_spell(monster)
+        elif isinstance(hero, Priest):
+            hero.purify()
+    elif choice == '3' and isinstance(hero, Hero):
+        hero.heal()
+    elif choice == '3' and isinstance(hero, Swordsman):
+        hero.block()
+    elif choice == '3' and isinstance(hero, Wizard):
+        hero.teleport()
+    elif choice == '3' and isinstance(hero, Priest):
+        hero.heal(random.choice(heroes))
 
-            choice = input("どうする？ (1, 2, or 3): ")
-            if choice == '1':
-                hero.attack_other(monster)
-            elif choice == '2':
-                if isinstance(hero, Hero):
-                    hero.special_attack(monster)
-                elif isinstance(hero, Swordsman):
-                    hero.special_attack(monster)
-                elif isinstance(hero, Wizard):
-                    hero.cast_spell(monster)
-                elif isinstance(hero, Priest):
-                    hero.purify()
-            elif choice == '3' and isinstance(hero, Hero):
-                hero.heal()
-            elif choice == '3' and isinstance(hero, Swordsman):
-                hero.block()
-            elif choice == '3' and isinstance(hero, Wizard):
-                hero.teleport()
-            elif choice == '3' and isinstance(hero, Priest):
-                hero.heal(random.choice(heroes))
-            else:
-                print("そのコマンドは無効です！")
-
-        if monster.is_alive():
+    if monster.is_alive():
             # ゴブリンの攻撃
             target_hero = random.choice(heroes)
             monster.attack_other(target_hero)
-
-    if all(hero.is_alive() for hero in heroes):
-        print(f"{', '.join(hero.name for hero in heroes)} たちの勝ち!")
-    else:
-        print(f"{', '.join(hero.name for hero in heroes)} たちは敗北した...")
 
 
 #バトル関数は実行されたアクションとバトルの結果を出力します。
@@ -153,14 +143,14 @@ def battle(heroes, monster):
         
 # キャラクターの作成
 hero = Hero("勇者", 40, 5, 20)
-swordsman = Swordsman("剣士", 35, 8)
+swordsman = Swordsman("剣士", 35, 8, 0)
 wizard = Wizard("魔法使い", 30, 6, 15)
 priest = Priest("僧侶", 30, 4, 25)
-monster = Character("モンスター", 30, 3)
+monster = Character("モンスター", 30, 3, 0)
 
 # バトルの開始
 battle([hero, swordsman, wizard, priest], monster)
-
+    
 #モンスターの特殊行動
 #class Monster(Character):
  #   def special_attack(self, other):
