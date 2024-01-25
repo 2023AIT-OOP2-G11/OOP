@@ -1,0 +1,43 @@
+{
+  "hero": [
+    {
+      "name": "勇者",
+      "hp": 40,
+      "attack": 5,
+      "mp": 20
+    }
+  ],
+  "swordsman": [
+    {
+      "name": "剣士",
+      "hp": 35,
+      "attack": 8,
+      "mp": 0
+    }
+  ],
+  "wizard": [   
+    {
+      "name": "魔法使い",
+      "hp": 30,
+      "attack": 6,
+      "mp": 15
+    }
+  ],
+  "priest": [
+    {
+      "name": "僧侶",
+      "hp": 30,
+      "attack": 4,
+      "mp": 25
+    }
+  ],
+  "monster": [
+    {
+      "name": "モンスター",
+      "hp": 30,
+      "attack": 3,
+      "mp": 0
+    }
+  ]
+}
+
