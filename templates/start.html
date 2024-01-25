@@ -34,15 +34,14 @@
     </section> -->
       <table border="0">
         <tr>
-          <th>JOB</th>
-          <th>SKILL</th>
+          <th>職業</th>
         </tr>
         <tr>
-          <td>勇者：</td>
+          <td>勇　　者：</td>
           <td>
-            <input type="radio" name="yuusya" value=1>剣の一閃
-            <input type="radio" name="yuusya" value=2>守りの姿勢
-            <input type="radio" name="yuusya" value=3>連続斬り
+              <input type="radio" name="yuusya" id="yuusya-id" value=1>剣の一閃
+              <input type="radio" name="yuusya" value=2>守りの姿勢
+              <input type="radio" name="yuusya" value=3>連続斬り
           </td>
         </tr>
         <tr>
@@ -54,7 +53,7 @@
           </td>
         </tr>
         <tr>
-          <td>剣士：</td>
+          <td>剣　　士：</td>
           <td>
             <input type="radio" name="kennshi" value=1>突進斬り
             <input type="radio" name="kennshi" value=2>かばう
@@ -62,7 +61,7 @@
           </td>
         </tr>
         <tr>
-          <td>僧侶：</td>
+          <td>僧　　侶：</td>
           <td>
             <input type="radio" name="kaifuku" value=1>癒しの手
             <input type="radio" name="kaifuku" value=2>祈りの光
@@ -73,5 +72,33 @@
       <button type="submit">開始</button>
     </form>
   </main>
+
+  <script>
+    // マウスオーバー時にメッセージを表示する関数
+    function showMessage(message) {
+        var messageBox = document.getElementById('messageBox');
+        messageBox.innerHTML = message;
+        messageBox.style.display = 'block';
+
+        // メッセージボックスをマウスカーソルの右上に配置
+        document.addEventListener('mousemove', updateMessageBoxPosition);
+    }
+
+    // マウスアウト時にメッセージを非表示にする関数
+    function hideMessage() {
+        var messageBox = document.getElementById('messageBox');
+        messageBox.style.display = 'none';
+
+        // イベントリスナーを削除
+        document.removeEventListener('mousemove', updateMessageBoxPosition);
+    }
+
+    // メッセージボックスの位置を更新する関数
+    function updateMessageBoxPosition(event) {
+        var messageBox = document.getElementById('messageBox');
+        messageBox.style.top = (event.clientY - 30) + 'px'; // 30は適切なオフセットです
+        messageBox.style.left = (event.clientX + 20) + 'px'; // 20は適切なオフセットです
+    }
+    </script>
 </body>
 </html>
