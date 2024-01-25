@@ -19,8 +19,9 @@ class Character:
 
     def attack_other(self, other):
         damage = random.randint(0, self.attack)
-        print(f"{self.name} の通常攻撃 {other.name} に {damage} のダメージ!")
+        print(f"\n{self.name} の通常攻撃 : {other.name} に {damage} のダメージ!")
         other.get_hit(damage)
+
 #Character クラスを継承し、魔法ポイント（mp）という新しい属性を追加
 class Hero(Character):
     def __init__(self, name, hp, attack, mp):
@@ -31,36 +32,36 @@ class Hero(Character):
         if self.mp >= 5:
             special_damage = self.attack * 2
             self.mp -= 5
-            print(f"{self.name} の特殊攻撃 {special_damage} のダメージ! (残りMP: {self.mp})")
+            print(f"\n{self.name} の特殊攻撃 {special_damage} のダメージ! (残りMP: {self.mp})")
             other.get_hit(special_damage)
         else:
-            print(f"{self.name} のMPが足りず、特殊攻撃が失敗!")
+            print(f"\n{self.name} のMPが足りず、特殊攻撃が失敗!")
 
     def heal(self):
         if self.mp >= 10:
             heal_amount = random.randint(5, 10)
             self.mp -= 10
             self.hp += heal_amount
-            print(f"{self.name} の回復魔法! HPが {heal_amount} 回復! (残りMP: {self.mp})")
+            print(f"\n{self.name} の回復魔法! HPが {heal_amount} 回復! (残りMP: {self.mp})")
         else:
-            print(f"{self.name} のMPが足りず、回復魔法が失敗!")
+            print(f"\n{self.name} のMPが足りず、回復魔法が失敗!")
             
 #Hero と同様に、これらのクラスは Character を継承し、キャラクタータイプに固有の追加の属性やメソッドを持つ可能性があります。
-            #is_alive: キャラクターが生きているかどうかをヒットポイントを基に確認します。get_hit: キャラクターがダメージを受けたときにヒットポイントを更新します。
-            #attack_other: ランダムなダメージで他のキャラクターに通常攻撃をシミュレートします。
+#is_alive: キャラクターが生きているかどうかをヒットポイントを基に確認します。get_hit: キャラクターがダメージを受けたときにヒットポイントを更新します。
+#attack_other: ランダムなダメージで他のキャラクターに通常攻撃をシミュレートします。
 class Swordsman(Character):
     def __init__(self, name, hp, attack):
         super().__init__(name, hp, attack)
 
     def special_attack(self, other):
         special_damage = self.attack * 2
-        print(f"{self.name} の強力な突進! {other.name} に {special_damage} のダメージ!")
+        print(f"\n{self.name} の強力な突進! {other.name} に {special_damage} のダメージ!")
         other.get_hit(special_damage)
 
 
     def block(self):
         block_value = random.randint(5, 10)
-        print(f"{self.name} が防御態勢をとった! 次の攻撃からのダメージを軽減します。 (軽減量: {block_value})")
+        print(f"\n{self.name} が防御態勢をとった! 次の攻撃からのダメージを軽減! (軽減量: {block_value})")
 
 class Wizard(Character):
     def __init__(self, name, hp, attack, mp):
@@ -71,13 +72,13 @@ class Wizard(Character):
         if self.mp >= 8:
             spell_damage = random.randint(10, 20)
             self.mp -= 8
-            print(f"{self.name} が魔法を唱えた! {other.name} に {spell_damage} のダメージ! (残りMP: {self.mp})")
+            print(f"\n{self.name} が魔法を唱えた! {other.name} に {spell_damage} のダメージ! (残りMP: {self.mp})")
             other.get_hit(spell_damage)
         else:
-            print(f"{self.name} のMPが足りず、魔法が失敗!")
+            print(f"\n{self.name} のMPが足りず、魔法が失敗!")
 
     def teleport(self):
-        print(f"{self.name} がテレポートして攻撃を回避した!")
+        print(f"\n{self.name} がテレポートして攻撃を回避した!")
 
 class Priest(Character):
     def __init__(self, name, hp, attack, mp):
@@ -89,12 +90,21 @@ class Priest(Character):
             heal_amount = random.randint(15, 25)
             self.mp -= 12
             target.hp += heal_amount
-            print(f"{self.name} の癒しの魔法! {target.name} のHPが {heal_amount} 回復! (残りMP: {self.mp})")
+            print(f"\n{self.name} の癒しの魔法! {target.name} のHPが {heal_amount} 回復! (残りMP: {self.mp})")
         else:
-            print(f"{self.name} のMPが足りず、癒しの魔法が失敗!")
+            print(f"\n{self.name} のMPが足りず、癒しの魔法が失敗!")
 
     def purify(self):
-        print(f"{self.name} が味方を浄化した! 状態異常が解除された。")
+        print(f"\n{self.name} が味方を浄化した! 状態異常が解除された。")
+
+class Monster(Character):
+    def special_attack(self, other):
+        if random.random() < 0.4:  # 40%の確率で特殊攻撃
+            special_damage = self.attack * 2
+            print(f"\n{self.name} の特殊攻撃! {other.name} に {special_damage} のダメージ!")
+            other.get_hit(special_damage)
+        else:
+            self.attack_other(other)
 
 #一連のヒーローとモンスターとの戦闘をシミュレートするメイン関数です。
 #各ヒーローをグループ内で反復処理し、アクション（通常攻撃、特殊攻撃、またはキャラクター固有のアクション）を選択できるようにします。
@@ -138,35 +148,25 @@ def battle(heroes, monster):
                 print("そのコマンドは無効です！")
 
         if monster.is_alive():
-            # ゴブリンの攻撃
+            # モンスターの攻撃
             target_hero = random.choice(heroes)
             monster.attack_other(target_hero)
 
     if all(hero.is_alive() for hero in heroes):
-        print(f"{', '.join(hero.name for hero in heroes)} たちの勝ち!")
+        print(f"\n{', '.join(hero.name for hero in heroes)} たちの勝ち!")
     else:
-        print(f"{', '.join(hero.name for hero in heroes)} たちは敗北した...")
+        print(f"\n{', '.join(hero.name for hero in heroes)} たちは敗北した...")
 
 
 #バトル関数は実行されたアクションとバトルの結果を出力します。
 #このコードは基本的なオブジェクト指向プログラミングの概念を示しており、異なるキャラクタータイプを持つターン制のバトルシナリオをシミュレートしています。
         
 # キャラクターの作成
-hero = Hero("勇者", 40, 5, 20)
-swordsman = Swordsman("剣士", 35, 8)
-wizard = Wizard("魔法使い", 30, 6, 15)
-priest = Priest("僧侶", 30, 4, 25)
-monster = Character("モンスター", 30, 3)
+hero = Hero("勇者", 50, 20, 20)
+swordsman = Swordsman("剣士", 60, 15)
+wizard = Wizard("魔法使い", 45, 6, 50)
+priest = Priest("僧侶", 50, 4, 25)
+monster = Character("モンスター", 150, 40)
 
 # バトルの開始
 battle([hero, swordsman, wizard, priest], monster)
-
-#モンスターの特殊行動
-#class Monster(Character):
- #   def special_attack(self, other):
-  #      if random.random() < 0.3:  # 30%の確率で特殊攻撃
-   #         special_damage = self.attack * 2
-    #        print(f"{self.name} に {special_damage} の痛恨のダメージ!")
-     #       other.get_hit(special_damage)
-      #  else:
-       #     self.attack_other(other)
