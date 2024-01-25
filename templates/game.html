@@ -6,7 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="game.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='game.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kaisei+Opti&family=Yomogi&family=Zen+Kurenaido&family=Zen+Old+Mincho&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -14,59 +19,95 @@
         <div class="leftwindow">
             <div class="fullwindow">
                 <div class="window"></div>
-                <p class="floor">1F</p>
-                <div class="hp"></div>
+                <div class="hp">
+                    <div class="full_hp"></div>
+                    <div class="monster_hp"></div>
+                </div>
             </div>
-            <div class="text"></div>
+            <div class="text">{{message}}</div>
         </div>
         <div class="rightwindow">
             <div class="mainplayer">
-            <table class="player player1">
-                <tbody>
-                    <tr>
-                        <th>name:</th>
-                        <td>aaaaaaa</td>
-                    </tr>
-                    <tr>
-                        <th>HP:</th>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <th>MP:</th>
-                        <td>100</td>
-                    </tr>
-                </tbody>
-            </table>
-            <table class="player player2">
-                <tbody>
-                    <tr>
-                        <th>name:</th>
-                        <td>aaaaaaa</td>
-                    </tr>
-                    <tr>
-                        <th>HP:</th>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <th>MP:</th>
-                        <td>100</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-            <div class="push">
-                <div class="button buttonA">
-                    <button>A</button>
-                </div>
-                <div class="button buttonB">
-                    <button>B</button>
-                </div>
-                <div class="button next">
-                    <button>next</button>
+                <table class="player player1">
+                    <tbody>
+                        <tr>
+                            <th>name:</th>
+                            <td>勇者</td>
+                        </tr>
+                        <tr>
+                            <th>HP:</th>
+                            <td>{{hero_hp}}</td>
+                        </tr>
+                        <tr>
+                            <th>MP:</th>
+                            <td>{{hero_mp}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="player player2">
+                    <tbody>
+                        <tr>
+                            <th>name:</th>
+                            <td>剣士</td>
+                        </tr>
+                        <tr>
+                            <th>HP:</th>
+                            <td>{{swordsman_hp}}</td>
+                        </tr>
+                        <tr>
+                            <th>MP:</th>
+                            <td>{{swordsman_mp}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="player player3">
+                    <tbody>
+                        <tr>
+                            <th>name:</th>
+                            <td>魔法使い</td>
+                        </tr>
+                        <tr>
+                            <th>HP:</th>
+                            <td>{{wizard_hp}}</td>
+                        </tr>
+                        <tr>
+                            <th>MP:</th>
+                            <td>{{wizard_mp}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="player player4">
+                    <tbody>
+                        <tr>
+                            <th>name:</th>
+                            <td>僧侶</td>
+                        </tr>
+                        <tr>
+                            <th>HP:</th>
+                            <td>{{priest_hp}}</td>
+                        </tr>
+                        <tr>
+                            <th>MP:</th>
+                            <td>{{priest_mp}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <form action="/game/play" method="post">
+                <div class="push">
+                    <div class="button buttonA">
+                        <button name="skill" value="1">攻撃</button>
+                    </div>
+                    <div class="button buttonB">
+                        <button name="skill" value="2">スキル</button>
+                    </div>
+                    <div class="button next">
+                        <button name="skill" value="3">防御</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </body>
 
 </html>
