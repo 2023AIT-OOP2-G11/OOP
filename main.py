@@ -17,6 +17,7 @@ def returnTotop():
 # 2. ゲーム進行フォーム
 @app.route('/start',methods=["POST"])
 def play():
+    choice = request.form.get('skill')
     if choice==-1:
                 # ゲーム画面を呼び出す
                 return render_template('game.html', 
