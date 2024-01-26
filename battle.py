@@ -153,14 +153,30 @@ def battle(heroes, monster, choice):
 
 
 #バトル関数は実行されたアクションとバトルの結果を出力します。
-#このコードは基本的なオブジェクト指向プログラミングの概念を示しており、異なるキャラクタータイプを持つターン制のバトルシナリオをシミュレートしています。
-        
-# キャラクターの作成
-hero = Hero("勇者", 40, 5, 20)
-swordsman = Swordsman("剣士", 35, 8, 0)
-wizard = Wizard("魔法使い", 30, 6, 15)
-priest = Priest("僧侶", 30, 4, 25)
-monster = Monster("モンスター", 30, 3, 0)
+
+# JSONファイルからデータを読み込む
+with open('status.json', 'r') as file:
+    data = json.load(file)
+
+# 各キャラクターのデータを取得し、対応するクラスのインスタンスを作成
+hero_data = data["hero"][0]
+swordsman_data = data["swordsman"][0]
+wizard_data = data["wizard"][0]
+priest_data = data["priest"][0]
+monster_data = data["monster"][0]
+
+# キャラクターのクラスごとに適切なインスタンスを作成
+hero = Hero(hero_data["name"], hero_data["hp"], hero_data["attack"], hero_data["mp"])
+swordsman = Swordsman(swordsman_data["name"], swordsman_data["hp"], swordsman_data["attack"], swordsman_data["mp"])
+wizard = Wizard(wizard_data["name"], wizard_data["hp"], wizard_data["attack"], wizard_data["mp"])
+priest = Priest(priest_data["name"], priest_data["hp"], priest_data["attack"], priest_data["mp"])
+monster = Monster(monster_data["name"], monster_data["hp"], monster_data["attack"], monster_data["mp"])
+
+# hero = Hero("勇者", 40, 5, 20)
+# swordsman = Swordsman("剣士", 35, 8, 0)
+# wizard = Wizard("魔法使い", 30, 6, 15)
+# priest = Priest("僧侶", 30, 4, 25)
+# monster = Monster("モンスター", 30, 3, 0)
 
 # バトルの開始
 battle([hero, swordsman, wizard, priest], monster)
