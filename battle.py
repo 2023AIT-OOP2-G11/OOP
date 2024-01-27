@@ -147,7 +147,7 @@ def battle(heroes, monster, choice):
         hero.heal(random.choice(heroes))
 
     if monster.is_alive():
-            # ゴブリンの攻撃
+            # モンスターの攻撃
             target_hero = random.choice(heroes)
             monster.attack_other(target_hero)
 
