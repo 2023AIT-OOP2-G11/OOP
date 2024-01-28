@@ -6,8 +6,6 @@ from modules.Wizard import Wizard
 from modules.Priest import Priest
 from modules.Swordman import Swordsman
 from modules.Monster import Monster
-#これはゲーム内のすべてのキャラクターの基本クラス
-#名前（name）、ヒットポイント（hp）、攻撃力（attack）、マジックポイント（mp）の属性を持っている
 
 # class Character:
 #     def __init__(self, name, hp, attack, mp):
@@ -148,7 +146,7 @@ def battle(heroes, monster, choice):
         hero.heal(random.choice(heroes))
 
     if monster.is_alive():
-            # ゴブリンの攻撃
+            # モンスターの攻撃
             target_hero = random.choice(heroes)
             monster.attack_other(target_hero)
 
@@ -169,10 +167,6 @@ swordsman = Swordsman(swordsman_data["name"], swordsman_data["hp"], swordsman_da
 wizard = Wizard(wizard_data["name"], wizard_data["hp"], wizard_data["attack"], wizard_data["mp"])
 priest = Priest(priest_data["name"], priest_data["hp"], priest_data["attack"], priest_data["mp"])
 monster = Monster(monster_data["name"], monster_data["hp"], monster_data["attack"], monster_data["mp"])
-
-#バトル関数は実行されたアクションとバトルの結果を出力します。
-#このコードは基本的なオブジェクト指向プログラミングの概念を示しており、異なるキャラクタータイプを持つターン制のバトルシナリオをシミュレートしています。
-        
 # # キャラクターの作成
 # hero = Hero("勇者", 40, 5, 20)
 # swordsman = Swordsman("剣士", 35, 8, 0)
