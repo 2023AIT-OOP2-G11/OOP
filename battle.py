@@ -123,29 +123,29 @@ from modules.Monster import Monster
 
 #一連のヒーローとモンスターとの戦闘をシミュレートするメイン関数です。
 #各ヒーローをグループ内で反復処理し、アクション（通常攻撃、特殊攻撃、またはキャラクター固有のアクション）を選択できるようにします。
-        
-def battle(heroes, monster, choice):
-    if choice == '1':
-        hero.attack_other(monster)
-    elif choice == '2':
-        if isinstance(hero, Hero):
-            hero.special_attack(monster)
-        elif isinstance(hero, Swordsman):
-            hero.special_attack(monster)
-        elif isinstance(hero, Wizard):
-            hero.cast_spell(monster)
-        elif isinstance(hero, Priest):
-            hero.purify()
-    elif choice == '3' and isinstance(hero, Hero):
-        hero.heal()
-    elif choice == '3' and isinstance(hero, Swordsman):
-        hero.block()
-    elif choice == '3' and isinstance(hero, Wizard):
-        hero.teleport()
-    elif choice == '3' and isinstance(hero, Priest):
-        hero.heal(random.choice(heroes))
+class battle:
+    def battle(heroes, monster, choice):
+        if choice == '1':
+            hero.attack_other(monster)
+        elif choice == '2':
+            if isinstance(hero, Hero):
+                hero.special_attack(monster)
+            elif isinstance(hero, Swordsman):
+                hero.special_attack(monster)
+            elif isinstance(hero, Wizard):
+                hero.cast_spell(monster)
+            elif isinstance(hero, Priest):
+                hero.purify()
+        elif choice == '3' and isinstance(hero, Hero):
+            hero.heal()
+        elif choice == '3' and isinstance(hero, Swordsman):
+            hero.block()
+        elif choice == '3' and isinstance(hero, Wizard):
+            hero.teleport()
+        elif choice == '3' and isinstance(hero, Priest):
+            hero.heal(random.choice(heroes))
 
-    if monster.is_alive():
+        if monster.is_alive():
             # モンスターの攻撃
             target_hero = random.choice(heroes)
             monster.attack_other(target_hero)
