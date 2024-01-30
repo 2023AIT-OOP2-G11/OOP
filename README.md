@@ -1,4 +1,4 @@
-# RPGゲーム
+# ドラゴン討伐隊
 
 ## 前提条件
 - Python version : 3.11.5 or higher
