@@ -13,4 +13,4 @@ class Swordsman(Character):
 
     def block(self):
         block_value = random.randint(5, 10)
-        print(f"\n{self.name} が防御態勢をとった! 次の攻撃からのダメージを軽減! (軽減量: {block_value})")
+        print(f"\n{self.name} が防御態勢をとった! 次の攻撃のダメージを軽減! (軽減量: {block_value})")
