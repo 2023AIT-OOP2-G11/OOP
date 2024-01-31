@@ -1,12 +1,13 @@
 from flask import Flask, request, render_template
 import json
 from battle import battle
+import battle
 
 app = Flask(__name__)
 
 # キャラクターの初期状態を読み込む関数
 def load_initial_status():
-    with open('status.json', 'r') as file:
+    with open('modules/status.json', 'r') as file:
         data = json.load(file)
     return data
 

@@ -1,4 +1,4 @@
-from Character import Character
+from modules.Character import Character
 import random
 
 class Hero(Character):
