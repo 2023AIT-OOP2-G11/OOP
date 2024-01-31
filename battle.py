@@ -82,7 +82,7 @@ class Battle():
                 cnt += 1
         print(cnt)
         if cnt == 0:
-            return False,"ヒーロたちは倒されました！ヒーロたちの敗北です！",self.heros,self.monster
+            return False,"ヒーロたちは倒されました！ヒーロたちの敗北です...",self.heros,self.monster
         
         if self.character_turn < 3:
             self.character_turn += 1
