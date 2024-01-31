@@ -11,9 +11,14 @@ class Priest(Character):
             heal_amount = random.randint(15, 25)
             self.mp -= 12
             target.hp += heal_amount
-            print(f"{self.name} の癒しの魔法! {target.name} のHPが {heal_amount} 回復! (残りMP: {self.mp})")
+            message = f"{self.name} の癒しの魔法! {target.name} のHPが {heal_amount} 回復! (残りMP: {self.mp})"
+            # print(f"{self.name} の癒しの魔法! {target.name} のHPが {heal_amount} 回復! (残りMP: {self.mp})")
         else:
-            print(f"{self.name} のMPが足りず、癒しの魔法が失敗")
+            message = f"{self.name} のMPが足りず、癒しの魔法が失敗"
+            # print(f"{self.name} のMPが足りず、癒しの魔法が失敗")
+        return message
 
     def purify(self):
-        print(f"{self.name} が味方を浄化した! 状態異常が解除された。")
+        message = f"{self.name} が味方を浄化した! 状態異常が解除された。"
+        # print(f"{self.name} が味方を浄化した! 状態異常が解除された。")
+        return message
