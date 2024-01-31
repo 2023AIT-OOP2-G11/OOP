@@ -17,14 +17,14 @@ class Character:
         self.hp -= damage
         if self.hp < 0:
             self.hp = 0
-        message = f"{self.name} の残りHP: {self.hp}"
+        message = f"{self.name} の残りHP: {self.hp}\n"
         print(f"{self.name} の残りHP: {self.hp}")
 
         return message
 
     def attack_other(self, other):
         damage = random.randint(0, self.attack)
-        message = f"\n{self.name} の通常攻撃 : {other.name} に {damage} のダメージ!"
+        message = f"\n{self.name} の攻撃! : {other.name} に {damage} のダメージ!"
         # print(f"\n{self.name} の通常攻撃 : {other.name} に {damage} のダメージ!")
         message += other.get_hit(damage)
         return message
