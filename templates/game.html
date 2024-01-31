@@ -24,6 +24,7 @@
                     <div class="monster_hp"></div>
                 </div>
             </div>
+            <img src="{{ url_for('static', filename='monster.png') }}" alt="monster">
             <div class="text">{{message}}</div>
         </div>
         <div class="rightwindow">
@@ -96,13 +97,13 @@
             <form action="/game/play" method="post">
                 <div class="push">
                     <div class="button buttonA">
-                        <button name="skill" value=1>1</button>
+                        <button name="skill" value="1">攻撃</button>
                     </div>
                     <div class="button buttonB">
-                        <button name="skill" value=2>2</button>
+                        <button name="skill" value="2">スキル</button>
                     </div>
                     <div class="button next">
-                        <button name="skill" value=3>3</button>
+                        <button name="skill" value="3">防御</button>
                     </div>
                 </div>
             </div>
