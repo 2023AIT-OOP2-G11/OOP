@@ -28,7 +28,7 @@
         {
           "name": "火の玉",
           "mp_cost": 12,
-          "damage": 25
+          "damage": 20
         },
         {
           "name": "氷の結界",
@@ -38,7 +38,7 @@
         {
           "name": "雷の魔法",
           "mp_cost": 18,
-          "damage": 40
+          "damage": 30
         }
       ]
     },
@@ -49,7 +49,7 @@
         {
           "name": "突進斬り",
           "mp_cost": 15,
-          "damage": 30
+          "damage": 20
         },
         {
           "name": "かばう",
@@ -59,7 +59,7 @@
         {
           "name": "回し斬り",
           "mp_cost": 20,
-          "damage": 45
+          "damage": 35
         }
       ]
     },
@@ -70,17 +70,17 @@
         {
           "name": "癒しの手",
           "mp_cost": 8,
-          "healing": 30
+          "healing": 10
         },
         {
           "name": "祈りの光",
           "mp_cost": 12,
-          "healing": 50
+          "healing": 20
         },
         {
           "name": "清めの泉",
           "mp_cost": 15,
-          "healing": 70
+          "healing": 30
         }
       ]
     }
