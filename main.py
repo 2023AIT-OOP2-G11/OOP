@@ -15,10 +15,12 @@ def top():
 def returnTotop():
     return render_template('top.html')
 
-# 2. ゲーム進行フォーム
+# 2. ゲームフォーム初期読み込み
 @app.route('/start',methods=["POST"])
 def start():
-     # ゲーム画面を呼び出す
+    # バトルインスタンスから各キャラクターのステータスを取得する
+    # ゲーム画面を呼び出す
+    # debug
     return render_template('game.html', 
                             message='test',
                             monster_hp=100,
@@ -32,9 +34,27 @@ def start():
                             priest_mp=100
                             )
 
-# 2. ゲーム進行フォーム
+# 3. ゲーム進行フォーム
 @app.route('/game/play',methods=["POST"])
 def game():
+    choice = request.form.get('skill')
+    # ゲーム画面を呼び出す
+    return render_template('game.html', 
+                            message=choice,
+                            monster_hp=100,
+                                        hero_hp=100,
+                                        swordsman_hp=100,
+                                        wizard_hp=100,
+                                        priest_hp=100,
+                                        hero_mp=100,
+                                        swordsman_mp=100,
+                                        wizard_mp=100,
+                                        priest_mp=100
+                                        )
+    # バトルメソッドを呼び出し、選択した数値を渡す                              
+    self.play.battle(choice)
+
+    """ # ゲーム画面を呼び出す
     if play.monster.is_alive():
         # キャラクタステータスを確認
         if all(hero.is_alive() for hero in heroes):
@@ -76,9 +96,9 @@ def game():
     # モンスタが倒された場合
     else:
         # エンド画面を呼び出す
-        return render_template('end.html',message="ヒーロたちの勝ち!")
+        return render_template('end.html',message="ヒーロたちの勝ち!") """
             
-# 3. ゲームエンド画面
+# 4. ゲームエンド画面
 @app.route('/start/end')
 def end():
     # ゲームのエンドを呼び出し
