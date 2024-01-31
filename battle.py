@@ -40,7 +40,7 @@ def battle(heroes, monster, choice):
         monster.attack_other(target_hero)
 
 # JSONファイルからデータを読み込む
-with open('status.json', 'r') as file:
+with open('modules/status.json', 'r') as file:
     data = json.load(file)
 
 # キャラクターのインスタンスを作成

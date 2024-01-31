@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template
 import json
 from battle import battle
+import battle
 
 app = Flask(__name__)
 
