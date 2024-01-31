@@ -8,7 +8,7 @@ class Hero(Character):
 
     def special_attack(self, other):
         if self.mp >= 5:
-            special_damage = self.attack * 2
+            special_damage = self.attack * 3
             self.mp -= 5
             message = f"{self.name} の特殊攻撃 {special_damage} のダメージ! (残りMP: {self.mp})"
             message += other.get_hit(special_damage)
@@ -18,7 +18,7 @@ class Hero(Character):
 
     def heal(self):
         if self.mp >= 10:
-            heal_amount = random.randint(5, 10)
+            heal_amount = random.randint(2, 5)
             self.mp -= 10
             self.hp += heal_amount
             message = f"{self.name} の回復魔法! HPが {heal_amount} 回復! (残りMP: {self.mp})"

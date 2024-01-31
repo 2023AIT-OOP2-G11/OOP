@@ -35,7 +35,7 @@ class Battle():
         # キャラクター行動ターンを指定する変数
         self.character_turn = 0
 
-    # キャラクターのステータスを
+    # キャラクターのステータスを取得
     def get_data(self):
         return self.heros,self.monster
 
@@ -74,7 +74,7 @@ class Battle():
             target_hero = random.choice([hero for hero in self.heros if hero.is_alive()])
             message += self.monster.attack_other(target_hero)
         else:
-            return False,"モンスターは倒されました！ヒーロたちの勝利です！",self.heros,self.monster
+            return False,"モンスターは倒されました！ヒーローたちの勝利です！",self.heros,self.monster
 
         cnt = 0
         for hero in self.heros:
@@ -82,7 +82,7 @@ class Battle():
                 cnt += 1
         print(cnt)
         if cnt == 0:
-            return False,"ヒーロたちは倒されました！ヒーロたちの敗北です...",self.heros,self.monster
+            return False,"ヒーロたちは倒されました！ヒーローたちの敗北です...",self.heros,self.monster
         
         if self.character_turn < 3:
             self.character_turn += 1

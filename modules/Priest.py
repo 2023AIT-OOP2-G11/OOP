@@ -8,7 +8,7 @@ class Priest(Character):
 
     def heal(self, target):
         if self.mp >= 12:
-            heal_amount = random.randint(15, 25)
+            heal_amount = random.randint(10, 20)
             self.mp -= 12
             target.hp += heal_amount
             message = f"{self.name} の癒しの魔法! {target.name} のHPが {heal_amount} 回復! (残りMP: {self.mp})"
