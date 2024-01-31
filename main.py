@@ -4,16 +4,18 @@ from battle import Battle
 
 app = Flask(__name__)
 
+# ルートの外で Battle インスタンスを作成
+battle = Battle()
+
 @app.route('/')
 def top():
     return render_template('top.html')
 
 @app.route('/top', methods=["POST"])
 def returntop():
+    battle.set_status()
     return render_template('top.html')
 
-# ルートの外で Battle インスタンスを作成
-battle = Battle()
 
 @app.route('/start', methods=["POST"])
 def start():

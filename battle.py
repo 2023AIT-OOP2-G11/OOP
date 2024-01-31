@@ -10,6 +10,16 @@ from modules.Monster import Monster
 
 class Battle():
     def __init__(self):
+        self.set_status()
+
+    # キャラクターの初期状態を読み込む関数
+    def __load_initial_status__(self):  
+        with open('modules/status.json', 'r') as file:
+            data = json.load(file)
+            # debug
+            print(data)
+        return data
+    def set_status(self):
         # ステータスファイルを読み込む
         data = self.__load_initial_status__()
         self.heros = []
@@ -24,14 +34,6 @@ class Battle():
         self.monster = Monster(data['monster'][0]['name'], data['monster'][0]['hp'], data['monster'][0]['attack'], data['monster'][0]['mp'])
         # キャラクター行動ターンを指定する変数
         self.character_turn = 0
-
-    # キャラクターの初期状態を読み込む関数
-    def __load_initial_status__(self):  
-        with open('modules/status.json', 'r') as file:
-            data = json.load(file)
-            # debug
-            print(data)
-        return data
 
     # キャラクターのステータスを
     def get_data(self):
@@ -88,8 +90,8 @@ class Battle():
             self.character_turn = 0
 
         for hero in self.heros:
-            if hero.mp + 3 <= hero.max_mp:
-                hero.mp += 3
+            if hero.mp + 5 <= hero.max_mp:
+                hero.mp += 5
         return True,message,self.heros,self.monster    
 
         # if choice == 'attack':
@@ -117,35 +119,35 @@ class Battle():
         #         # MPが足りない場合、スキルの使用に失敗
         #         pass
 # バトルのシミュレーションを行う関数
-def battle(heroes, monster, choice):
-    for hero in heroes:
-        if hero.is_alive():
-            if choice == '1':
-                # 通常攻撃
-                hero.attack_other(monster)
-            elif choice == '2':
-                # 特殊攻撃またはスキルの使用
-                if isinstance(hero, Hero):
-                    hero.special_attack(monster)
-                elif isinstance(hero, Swordsman):
-                    hero.special_attack(monster)
-                elif isinstance(hero, Wizard):
-                    hero.cast_spell(monster)
-                elif isinstance(hero, Priest):
-                    hero.heal(random.choice(heroes)) # 仲間をランダムに選択して回復
-            elif choice == '3':
-                # 防御または回避のアクション
-                if isinstance(hero, Swordsman):
-                    hero.block()
-                elif isinstance(hero, Wizard):
-                    hero.teleport()
-                elif isinstance(hero, Priest):
-                    hero.purify()
+# def battle(heroes, monster, choice):
+#     for hero in heroes:
+#         if hero.is_alive():
+#             if choice == '1':
+#                 # 通常攻撃
+#                 hero.attack_other(monster)
+#             elif choice == '2':
+#                 # 特殊攻撃またはスキルの使用
+#                 if isinstance(hero, Hero):
+#                     hero.special_attack(monster)
+#                 elif isinstance(hero, Swordsman):
+#                     hero.special_attack(monster)
+#                 elif isinstance(hero, Wizard):
+#                     hero.cast_spell(monster)
+#                 elif isinstance(hero, Priest):
+#                     hero.heal(random.choice(heroes)) # 仲間をランダムに選択して回復
+#             elif choice == '3':
+#                 # 防御または回避のアクション
+#                 if isinstance(hero, Swordsman):
+#                     hero.block()
+#                 elif isinstance(hero, Wizard):
+#                     hero.teleport()
+#                 elif isinstance(hero, Priest):
+#                     hero.purify()
 
-    # モンスターの攻撃
-    if monster.is_alive():
-        target_hero = random.choice([hero for hero in heroes if hero.is_alive()])
-        monster.attack_other(target_hero)
+#     # モンスターの攻撃
+#     if monster.is_alive():
+#         target_hero = random.choice([hero for hero in heroes if hero.is_alive()])
+#         monster.attack_other(target_hero)
 
 
 # バトルの開始
