@@ -1,4 +1,5 @@
 {
+<<<<<<< Updated upstream
   "hero": [
     {
       "name": "勇者",
@@ -39,4 +40,8 @@
       "mp": 0
     }
   ]
+=======
+  "HP": 100,
+  "MP": 100
+>>>>>>> Stashed changes
 }
