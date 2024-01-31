@@ -57,7 +57,7 @@ priest = Priest(priest_data["name"], priest_data["hp"], priest_data["attack"], p
 monster = Monster(monster_data["name"], monster_data["hp"], monster_data["attack"], monster_data["mp"])
 
 # バトルの開始
-battle([hero, swordsman, wizard, priest], monster)
+#battle([hero, swordsman, wizard, priest], monster)
 
 
 # import random
