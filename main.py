@@ -15,6 +15,12 @@ app = Flask(__name__)
 def load_initial_status():
     with open('modules/status.json', 'r') as file:
         data = json.load(file)
+
+        # debug
+        print(data)
+        print(data['hero'][0]['name'])
+        print(data['hero'][0]['hp'])
+        print(data['hero'][0]['mp'])
     return data
 
 @app.route('/')
@@ -24,7 +30,11 @@ def top():
 @app.route('/start', methods=["POST"])
 def start():
     data = load_initial_status()
-    return render_template('game.html', **data)
+    print(data)
+    print(data['hero'][0]['name'])
+    print(data['hero'][0]['hp'])
+    print(data['hero'][0]['mp'])
+    return render_template('game.html', data=data)
 
 @app.route('/game/play', methods=["POST"])
 def game():
