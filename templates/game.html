@@ -12,6 +12,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Kaisei+Opti&family=Yomogi&family=Zen+Kurenaido&family=Zen+Old+Mincho&display=swap"
         rel="stylesheet">
+        <script>
+            const initialMonsterHp = {{ monster.hp }}; // Pythonで取得したモンスターの初期HP
+        </script>
 </head>
 
 <body>
@@ -21,7 +24,7 @@
                 <div class="window"></div>
                 <div class="hp">
                     <div class="full_hp"></div>
-                    <div class="monster_hp"></div>
+                    <div class="monster_hp" id="monster_hp"></div>
                 </div>
             </div>
             <!--<img src="{{ url_for('static', filename='monster.png') }}" alt="monster">-->
@@ -106,9 +109,26 @@
                         <button name="skill" value="3">防御</button>
                     </div>
                 </div>
-            </div>
         </div>
+    </div>
     </form>
+    <script>
+        const monster_hp = document.getElementById('monster_hp'); // ライフバー
+        let life = initialMonsterHp; // 初期値としてPythonから渡された値を使用
+
+        // 初期の幅を設定
+        monster_hp.style.width = (life / 300) * 300 + "px";
+
+        // *** ライフ変更処理 ***
+        function alterLife(value) {
+            // lifeの値を算出する
+            life += value;
+
+            // スタイル(幅)を更新する
+            monster_hp.style.width = (life / 300) * 300 + "px";
+        }
+    </script>
+
 </body>
 
 </html>
