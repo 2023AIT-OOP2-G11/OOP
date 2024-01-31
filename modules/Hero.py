@@ -3,7 +3,7 @@ import random
 
 class Hero(Character):
     def __init__(self, name, hp, attack, mp):
-        super().__init__(name, hp, attack)
+        super().__init__(name, hp, attack, mp)
         self.mp = mp
 
     def special_attack(self, other):
