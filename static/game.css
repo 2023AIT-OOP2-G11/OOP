@@ -68,11 +68,10 @@ img {
 .text {
     background-color: rgb(83, 72, 39);
     border: solid 4px rgb(255, 249, 202);
-    padding-top: 30px;
-    padding-left: 30px;
+    padding: 10px 10px 40px;
     margin-top: 30px;
     height: 120px;
-    font-size: 30px;
+    font-size: 25px;
 }
 
 
