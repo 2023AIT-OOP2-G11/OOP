@@ -1,4 +1,4 @@
-body{
+body {
     background-color: rgb(131, 112, 54);
     margin: 2% 0;
     font-family: "Kaisei Opti", serif;
@@ -6,27 +6,27 @@ body{
     font-style: normal;
 }
 
-.mainwindow{
+.mainwindow {
     display: flex;
     max-width: 90%;
     margin: 0 auto;
 }
 
-.leftwindow{
+.leftwindow {
     background-color: rgb(131, 112, 54);
     color: aliceblue;
     width: 60%;
 }
 
-.rightwindow{
+.rightwindow {
     margin: 0 0 0 auto;
 }
 
-.fullwindow{
+.fullwindow {
     display: flex;
 }
 
-.window{
+.window {
     background-image: url(../static/haikei.jpg);
     background-size: cover;
     width: 770px;
@@ -34,12 +34,12 @@ body{
     position: relative;
 }
 
-.hp{
+.hp {
     position: relative;
     display: flex;
 }
 
-.monster_hp{
+.monster_hp {
     position: absolute;
     background-color: rgb(255, 77, 77);
     width: 300px;
@@ -48,15 +48,15 @@ body{
     margin-top: 50px;
 }
 
-img{
+img {
     position: absolute;
-    margin-left: 130px;
-    margin-top: 100px;
+    margin-left: 220px;
+    margin-top: -400px;
     width: 400px;
     height: 400px;
 }
 
-.full_hp{
+.full_hp {
     position: absolute;
     background-color: rgb(8, 8, 8);
     width: 300px;
@@ -65,7 +65,7 @@ img{
     margin-top: 50px;
 }
 
-.text{
+.text {
     background-color: rgb(83, 72, 39);
     border: solid 4px rgb(255, 249, 202);
     padding-top: 30px;
@@ -76,12 +76,12 @@ img{
 }
 
 
-.mainplayer{
+.mainplayer {
     height: 500px;
     width: auto;
 }
 
-.player{
+.player {
     background-color: aliceblue;
     margin: auto;
     width: 450px;
@@ -89,19 +89,19 @@ img{
     height: 110px;
 }
 
-.player2{
+.player2 {
     margin-top: 20px;
 }
 
-.player3{
+.player3 {
     margin-top: 20px;
 }
 
-.player4{
+.player4 {
     margin-top: 20px;
 }
 
-button{
+button {
     border-radius: 10px;
     width: 100px;
     height: 100px;
@@ -110,6 +110,6 @@ button{
     margin-top: 70px;
 }
 
-.push{
+.push {
     display: flex;
 }
