@@ -8,7 +8,114 @@ from modules.Priest import Priest
 from modules.Swordman import Swordsman
 from modules.Monster import Monster
 
+class Battle():
+    def __init__(self):
+        # ステータスファイルを読み込む
+        data = self.__load_initial_status__()
+        self.heros = []
+        hero = Hero(data['hero'][0]['name'], data['hero'][0]['hp'], data['hero'][0]['attack'], data['hero'][0]['mp'])
+        self.heros.append(hero)
+        swordsman = Swordsman(data['swordsman'][0]['name'], data['swordsman'][0]['hp'], data['swordsman'][0]['attack'], data['swordsman'][0]['mp'])
+        self.heros.append(swordsman)
+        wizard = Wizard(data['wizard'][0]['name'], data['wizard'][0]['hp'], data['wizard'][0]['attack'], data['wizard'][0]['mp'])
+        self.heros.append(wizard)
+        priest = Priest(data['priest'][0]['name'], data['priest'][0]['hp'], data['priest'][0]['attack'], data['priest'][0]['mp'])
+        self.heros.append(priest)
+        self.monster = Monster(data['monster'][0]['name'], data['monster'][0]['hp'], data['monster'][0]['attack'], data['monster'][0]['mp'])
+        # キャラクター行動ターンを指定する変数
+        self.character_turn = 0
 
+    # キャラクターの初期状態を読み込む関数
+    def __load_initial_status__(self):  
+        with open('modules/status.json', 'r') as file:
+            data = json.load(file)
+            # debug
+            print(data)
+        return data
+
+    # キャラクターのステータスを
+    def get_data(self):
+        return self.heros,self.monster
+
+    def battle(self,choice):
+        # 行動ターンのキャラクターのデータを取得
+        hero = self.heros[self.character_turn]
+
+        message = ""
+        if choice == "1":
+            # 通常攻撃
+            message += hero.attack_other(self.monster)
+            print(message)
+        elif choice == "2":
+                # 特殊攻撃またはスキルの使用
+            if isinstance(hero, Hero):
+                message += hero.special_attack(self.monster)
+            elif isinstance(hero, Swordsman):
+                message += hero.special_attack(self.monster)
+            elif isinstance(hero, Wizard):
+                message += hero.cast_spell(self.monster)
+            elif isinstance(hero, Priest):
+                message += hero.heal(random.choice(self.heros)) # 仲間をランダムに選択して回復
+        elif choice == "3":
+            # 防御または回避のアクション
+            if isinstance(hero, Swordsman):
+                message += hero.block()
+            elif isinstance(hero, Wizard):
+                message += hero.teleport()
+            elif isinstance(hero, Priest):
+                message += hero.purify()
+            else:
+                message += hero.heal()
+
+        # モンスターの攻撃
+        if self.monster.is_alive():
+            target_hero = random.choice([hero for hero in self.heros if hero.is_alive()])
+            message += self.monster.attack_other(target_hero)
+        else:
+            return False,"モンスターは倒されました！ヒーロたちの勝利です！",self.heros,self.monster
+
+        cnt = 0
+        for hero in self.heros:
+            if hero.is_alive():
+                cnt += 1
+        print(cnt)
+        if cnt == 0:
+            return False,"ヒーロたちは倒されました！ヒーロたちの敗北です！",self.heros,self.monster
+        
+        if self.character_turn < 3:
+            self.character_turn += 1
+        else:
+            self.character_turn = 0
+
+        for hero in self.heros:
+            if hero.mp + 3 <= hero.max_mp:
+                hero.mp += 3
+        return True,message,self.heros,self.monster    
+
+        # if choice == 'attack':
+        #     # 通常攻撃の場合、モンスターのHPからヒーローの攻撃力を引く
+        #     data['monster']['hp'] -= hero['attack']
+        # else:
+        #     # スキルを使用する場合
+        #     skill_index = int(choice) - 1
+        #     skill = hero['skills'][skill_index]
+
+        #     if hero['mp'] >= skill['mp_cost']:
+        #         # MPが足りる場合、スキルを使用
+        #         hero['mp'] -= skill['mp_cost']
+
+        #         if 'damage' in skill:
+        #             # スキルによるダメージ
+        #             data['monster']['hp'] -= skill['damage']
+        #         elif 'defense_boost' in skill:
+        #             # 防御ブースト
+        #             hero['hp'] += skill['defense_boost']
+        #         elif 'healing' in skill:
+        #             # 回復
+        #             hero['hp'] += skill['healing']
+        #     else:
+        #         # MPが足りない場合、スキルの使用に失敗
+        #         pass
 # バトルのシミュレーションを行う関数
 def battle(heroes, monster, choice):
     for hero in heroes:
@@ -40,26 +147,9 @@ def battle(heroes, monster, choice):
         target_hero = random.choice([hero for hero in heroes if hero.is_alive()])
         monster.attack_other(target_hero)
 
-# JSONファイルからデータを読み込む
-with open('modules/status.json', 'r') as file:
-    data = json.load(file)
-
-# キャラクターのインスタンスを作成
-hero_data = data["hero"][0]
-swordsman_data = data["swordsman"][0]
-wizard_data = data["wizard"][0]
-priest_data = data["priest"][0]
-monster_data = data["monster"][0]
-
-hero = Hero(hero_data["name"], hero_data["hp"], hero_data["attack"], hero_data["mp"])
-swordsman = Swordsman(swordsman_data["name"], swordsman_data["hp"], swordsman_data["attack"], swordsman_data["mp"])
-wizard = Wizard(wizard_data["name"], wizard_data["hp"], wizard_data["attack"], wizard_data["mp"])
-priest = Priest(priest_data["name"], priest_data["hp"], priest_data["attack"], priest_data["mp"])
-monster = Monster(monster_data["name"], monster_data["hp"], monster_data["attack"], monster_data["mp"])
 
 # バトルの開始
 #battle([hero, swordsman, wizard, priest], monster)
-
 
 # import random
 # import json

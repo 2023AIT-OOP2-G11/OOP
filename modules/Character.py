@@ -8,6 +8,7 @@ class Character:
         self.hp = hp
         self.attack = attack
         self.mp = mp
+        self.max_mp = mp
 
     def is_alive(self):
         return self.hp > 0
@@ -16,12 +17,18 @@ class Character:
         self.hp -= damage
         if self.hp < 0:
             self.hp = 0
+        message = f"{self.name} の残りHP: {self.hp}"
         print(f"{self.name} の残りHP: {self.hp}")
+
+        return message
 
     def attack_other(self, other):
         damage = random.randint(0, self.attack)
-        print(f"\n{self.name} の通常攻撃 : {other.name} に {damage} のダメージ!")
-        other.get_hit(damage)
+        message = f"\n{self.name} の通常攻撃 : {other.name} に {damage} のダメージ!"
+        # print(f"\n{self.name} の通常攻撃 : {other.name} に {damage} のダメージ!")
+        message += other.get_hit(damage)
+        return message
+
     #プレイヤー
     def getHP(self):
         return self.hp
