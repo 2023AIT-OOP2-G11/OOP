@@ -8,6 +8,7 @@ from modules.Priest import Priest
 from modules.Swordman import Swordsman
 from modules.Monster import Monster
 
+
 # バトルのシミュレーションを行う関数
 def battle(heroes, monster, choice):
     for hero in heroes:
