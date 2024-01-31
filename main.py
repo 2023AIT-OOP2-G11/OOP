@@ -2,6 +2,12 @@ from flask import Flask, request, render_template
 import json
 from battle import battle
 import battle
+from modules.Character import Character
+from modules.Hero import Hero
+from modules.Wizard import Wizard
+from modules.Priest import Priest
+from modules.Swordman import Swordsman
+from modules.Monster import Monster
 
 app = Flask(__name__)
 
@@ -25,44 +31,73 @@ def game():
     choice = request.form.get('skill')
     data = load_initial_status()
 
-    # 勇者のデータを取得（例として）
-    hero = data['characters'][0]
+    # キャラクターのインスタンスを作成
+    hero_data = data["hero"][0]
+    swordsman_data = data["swordsman"][0]
+    wizard_data = data["wizard"][0]
+    priest_data = data["priest"][0]
+    monster_data = data["monster"][0]
 
-    if choice == 'attack':
-        # 通常攻撃の場合、モンスターのHPからヒーローの攻撃力を引く
-        data['monster']['hp'] -= hero['attack']
-    else:
-        # スキルを使用する場合
-        skill_index = int(choice) - 1
-        skill = hero['skills'][skill_index]
+    hero = Hero(hero_data["name"], hero_data["hp"], hero_data["attack"], hero_data["mp"])
+    swordsman = Swordsman(swordsman_data["name"], swordsman_data["hp"], swordsman_data["attack"], swordsman_data["mp"])
+    wizard = Wizard(wizard_data["name"], wizard_data["hp"], wizard_data["attack"], wizard_data["mp"])
+    priest = Priest(priest_data["name"], priest_data["hp"], priest_data["attack"], priest_data["mp"])
+    monster = Monster(monster_data["name"], monster_data["hp"], monster_data["attack"], monster_data["mp"])
 
-        if hero['mp'] >= skill['mp_cost']:
-            # MPが足りる場合、スキルを使用
-            hero['mp'] -= skill['mp_cost']
+    # バトルの開始
+    battle([hero, swordsman, wizard, priest], monster, choice)
 
-            if 'damage' in skill:
-                # スキルによるダメージ
-                data['monster']['hp'] -= skill['damage']
-            elif 'defense_boost' in skill:
-                # 防御ブースト
-                hero['hp'] += skill['defense_boost']
-            elif 'healing' in skill:
-                # 回復
-                hero['hp'] += skill['healing']
-        else:
-            # MPが足りない場合、スキルの使用に失敗
-            pass
+    # バトル後のデータをHTMLに渡す
+    data["hero_hp"] = hero.getHP()
+    data["hero_mp"] = hero.getMP()
+    data["swordsman_hp"] = swordsman.getHP()
+    data["swordsman_mp"] = swordsman.getMP()
+    data["wizard_hp"] = wizard.getHP()
+    data["wizard_mp"] = wizard.getMP()
+    data["priest_hp"] = priest.getHP()
+    data["priest_mp"] = priest.getMP()
+    data["monster_hp"] = monster.getHP()
 
-    # モンスターが倒された場合の処理
-    if data['monster']['hp'] <= 0:
-        return render_template('end.html', message="ヒーロたちの勝ち！")
-
-    # キャラクターが倒された場合の処理（すべてのキャラクターのHPをチェック）
-    if all(hero['hp'] <= 0 for hero in data['characters']):
-        return render_template('end.html', message="ヒーロたちは敗北した...")
-
-    # 戦闘を続行
     return render_template('game.html', **data)
+
+    # # 勇者のデータを取得（例として）
+    # hero = data['characters'][0]
+
+    # if choice == 'attack':
+    #     # 通常攻撃の場合、モンスターのHPからヒーローの攻撃力を引く
+    #     data['monster']['hp'] -= hero['attack']
+    # else:
+    #     # スキルを使用する場合
+    #     skill_index = int(choice) - 1
+    #     skill = hero['skills'][skill_index]
+
+    #     if hero['mp'] >= skill['mp_cost']:
+    #         # MPが足りる場合、スキルを使用
+    #         hero['mp'] -= skill['mp_cost']
+
+    #         if 'damage' in skill:
+    #             # スキルによるダメージ
+    #             data['monster']['hp'] -= skill['damage']
+    #         elif 'defense_boost' in skill:
+    #             # 防御ブースト
+    #             hero['hp'] += skill['defense_boost']
+    #         elif 'healing' in skill:
+    #             # 回復
+    #             hero['hp'] += skill['healing']
+    #     else:
+    #         # MPが足りない場合、スキルの使用に失敗
+    #         pass
+
+    # # モンスターが倒された場合の処理
+    # if data['monster']['hp'] <= 0:
+    #     return render_template('end.html', message="ヒーロたちの勝ち！")
+
+    # # キャラクターが倒された場合の処理（すべてのキャラクターのHPをチェック）
+    # if all(hero['hp'] <= 0 for hero in data['characters']):
+    #     return render_template('end.html', message="ヒーロたちは敗北した...")
+
+    # # 戦闘を続行
+    # return render_template('game.html', **data)
 
 @app.route('/start/end')
 def end():
