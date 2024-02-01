@@ -20,7 +20,7 @@ def returntop():
 @app.route('/start', methods=["POST"])
 def start():
     heros,monster = battle.get_data()
-    return render_template('game.html', heros=heros, monster=monster)
+    return render_template('game.html', heros=heros, monster=monster, message='世界を救うのは君だ！強力な武器と魔法でドラゴンを打ち倒せ！')
 
 @app.route('/game/play', methods=["POST"])
 def game():

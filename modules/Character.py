@@ -17,7 +17,7 @@ class Character:
         self.hp -= damage
         if self.hp < 0:
             self.hp = 0
-        message = f"{self.name} の残りHP: {self.hp}\n"
+        message = f"\n{self.name} の残りHP: {self.hp}"
         print(f"{self.name} の残りHP: {self.hp}")
 
         return message
