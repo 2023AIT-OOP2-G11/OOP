@@ -84,13 +84,21 @@ class Battle():
         if cnt == 0:
             return False,"ヒーロたちは倒されました！ヒーロたちの敗北です！",self.heros,self.monster
         
-        if self.character_turn < 3:
-            self.character_turn += 1
-        else:
-            self.character_turn = 0
+        while True:
+            if self.character_turn < 3:
+                self.character_turn += 1
+            else:
+                self.character_turn = 0
+                for hero in self.heros:
+                    if hero.is_alive():
+                        if hero.mp + 5 <= hero.max_mp:
+                            hero.mp += 5
+            hero = self.heros[self.character_turn]
 
-        for hero in self.heros:
-            if hero.mp + 5 <= hero.max_mp:
-                hero.mp += 5
+            if hero.is_alive(): 
+                break
+            
+        hero = self.heros[self.character_turn]
+        message += "\n" + hero.name + "の行動："
+
         return True,message,self.heros,self.monster    
-
